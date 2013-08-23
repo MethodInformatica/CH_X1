@@ -1,0 +1,238 @@
+USE [appLubriderm]
+GO
+/****** Object:  Table [dbo].[loginAdmin]    Script Date: 04/02/2013 18:08:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[loginAdmin](
+	[idLogin] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](250) NULL,
+	[usuario] [varchar](250) NULL,
+	[pass] [varchar](250) NULL,
+ CONSTRAINT [PK_login] PRIMARY KEY CLUSTERED 
+(
+	[idLogin] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[loginAdmin] ON
+INSERT [dbo].[loginAdmin] ([idLogin], [nombre], [usuario], [pass]) VALUES (1, N'www.method.cl', N'method', N'23456')
+SET IDENTITY_INSERT [dbo].[loginAdmin] OFF
+/****** Object:  StoredProcedure [dbo].[SP_W_GRABARFAN]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_W_GRABARFAN] 
+	@idUsuarioFacebook varchar(500),
+	@fecha	datetime,
+ 	@estado	tinyint
+As
+INSERT INTO [fan]
+           ([idUsuarioFacebook]
+           ,[fecha]
+           ,[estado])
+     VALUES( @idUsuarioFacebook
+			,@fecha
+			,@estado)
+
+Select Top 1 idUsuarioFacebook From fan Order By fecha DESC
+GO
+/****** Object:  StoredProcedure [dbo].[SP_W_GRABARUSUARIO]    Script Date: 04/02/2013 18:08:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_W_GRABARUSUARIO] 
+	@idUsuarioFacebook varchar(500),
+	@nombre	varchar(300),
+ 	@apellido	varchar(300),
+ 	@rut	varchar(9),
+ 	@dv	varchar(2),
+ 	@dia	varchar(2),
+ 	@mes	varchar(2),
+ 	@ano	varchar(4),
+ 	@calle	varchar(500),
+ 	@numero	varchar(100),
+ 	@depto	varchar(50) = '',
+ 	@comuna	varchar(150),
+ 	@region	varchar(150),
+ 	@telefono	varchar(150),
+ 	@email	varchar(300),
+ 	@recibirInformacion tinyint
+As
+
+IF EXISTS(SELECT * FROM usuario where idUsuarioFacebook = @idUsuarioFacebook)
+BEGIN
+	UPDATE [usuario] SET
+	[nombre] =  @nombre,
+    [apellido]=  @apellido,
+    [rut]= @rut ,
+    [dv]= @dv ,
+    [dia]= @dia ,
+    [mes]=  @mes,
+    [ano]=  @ano,
+    [calle]= @calle ,
+    [numero]=  @numero,
+    [depto]=  @depto,
+    [comuna]= @comuna ,
+    [region]=  @region,
+    [telefono]= @telefono ,
+    [email]=  @email,
+    [recibirInformacion]=  @recibirInformacion
+        WHERE [idUsuarioFacebook] = @idUsuarioFacebook
+     select top 1 * from usuario where idUsuarioFacebook = @idUsuarioFacebook
+END
+ELSE
+BEGIN
+	INSERT INTO [usuario]
+           ([idUsuarioFacebook]
+           ,[nombre]
+           ,[apellido]
+           ,[rut]
+           ,[dv]
+           ,[dia]
+           ,[mes]
+           ,[ano]
+           ,[calle]
+           ,[numero]
+           ,[depto]
+           ,[comuna]
+           ,[region]
+           ,[telefono]
+           ,[email]
+           ,[recibirInformacion])
+     VALUES
+           (
+           @idUsuarioFacebook,
+           @nombre,
+           @apellido,
+           @rut,
+           @dv,
+           @dia,
+           @mes,
+           @ano,
+           @calle,
+           @numero,
+           @depto,
+           @comuna,
+           @region,
+           @telefono,
+           @email,
+           @recibirInformacion)
+
+Select Top 1 idUsuarioFacebook From usuario Order By idUsuario DESC
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_W_GRABARBOLETA]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_W_GRABARBOLETA] 
+	@idUsuarioFacebook varchar(500),
+	@numero	varchar(200),
+ 	@monto	varchar(200),
+ 	@dia	varchar(200),
+ 	@mes	varchar(200),
+ 	@ano	varchar(200),
+ 	@estado	tinyint
+As
+IF NOT EXISTS(SELECT * FROM [boleta] WHERE [numero]=@numero AND [monto]= @monto AND [dia]=@dia AND [mes]=@mes AND [ano]=@ano)
+BEGIN
+	INSERT INTO [boleta]
+           ([idUsuarioFacebook]
+           ,[numero]
+           ,[monto]
+           ,[dia]
+           ,[mes]
+           ,[ano]
+           ,[estado], fechaIngreso)
+     VALUES( @idUsuarioFacebook
+			,@numero
+			,@monto
+			,@dia
+			,@mes
+			,@ano
+			,@estado,GETDATE())
+
+Select Top 1 idUsuarioFacebook From boleta Order By idBoleta DESC
+END
+ELSE
+BEGIN
+	INSERT INTO boletaError(idUsuarioFacebook,nBoleta,monto,dia,mes,ano,fechaIntento)
+	VALUES(@idUsuarioFacebook,@numero,@monto,@dia,@mes,@ano,GETDATE())
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_S_TRAERUSUARIO]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_S_TRAERUSUARIO]
+@idUsuarioFacebook varchar(500)
+
+AS
+SELECT * FROM usuario where idUsuarioFacebook = @idUsuarioFacebook
+GO
+/****** Object:  StoredProcedure [dbo].[SP_S_TRAERBOLETA_IDFACEBOOK]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_S_TRAERBOLETA_IDFACEBOOK]
+@IDFACEBOOK varchar(250)
+
+AS
+
+SELECT * from boleta WHERE idUsuarioFacebook = @IDFACEBOOK
+GO
+/****** Object:  StoredProcedure [dbo].[SP_S_LISTARUSUARIOS]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_S_LISTARUSUARIOS]
+   @NUM_PAGINA   INT
+   ,@TAM_PAGINA   INT
+AS
+   SET NOCOUNT ON;
+
+   SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; 
+
+   WITH DRV_TBL AS 
+   (
+      SELECT ROW_NUMBER() OVER (ORDER BY idUsuario DESC) AS rownum ,* FROM usuario
+   )
+
+   SELECT * FROM DRV_TBL 
+   WHERE ROWNUM BETWEEN (@NUM_PAGINA*@TAM_PAGINA)-@TAM_PAGINA+1 AND (@NUM_PAGINA*@TAM_PAGINA)
+GO
+/****** Object:  StoredProcedure [dbo].[SP_S_COUNTUSUARIO]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_S_COUNTUSUARIO]
+@a int
+AS
+
+   Select COUNT(*) as total From usuario
+GO
+/****** Object:  StoredProcedure [dbo].[SP_S_CONSULTARLOGIN]    Script Date: 04/02/2013 18:08:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_S_CONSULTARLOGIN]
+@nombreUsuario varchar(250),
+@contrasena varchar(250)
+
+AS
+SELECT * FROM loginAdmin where usuario = @nombreUsuario and pass = @contrasena
+GO

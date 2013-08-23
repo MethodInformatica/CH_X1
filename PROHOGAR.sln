@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH_DAO", "PH_DAO\PH_DAO.csproj", "{39838CA3-BF07-4142-87C3-729B0F786A9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH_ENT", "PH_ENT\PH_ENT.csproj", "{81019EE3-F04C-436E-944A-807D44A92C41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH_BSS", "PH_BSS\PH_BSS.csproj", "{DE625B2E-EB49-47EC-815E-6D96D8B972EC}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PH_WEB", "PH_WEB\", "{9D535513-41B3-456A-8654-9ACC7FA262C7}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = "{DE625B2E-EB49-47EC-815E-6D96D8B972EC}|PH_BSS.dll;{39838CA3-BF07-4142-87C3-729B0F786A9C}|PH_DAO.dll;{81019EE3-F04C-436E-944A-807D44A92C41}|PH_ENT.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/PH_WEB"
+		Debug.AspNetCompiler.PhysicalPath = "PH_WEB\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\PH_WEB\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/PH_WEB"
+		Release.AspNetCompiler.PhysicalPath = "PH_WEB\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\PH_WEB\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1540"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39838CA3-BF07-4142-87C3-729B0F786A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39838CA3-BF07-4142-87C3-729B0F786A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39838CA3-BF07-4142-87C3-729B0F786A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39838CA3-BF07-4142-87C3-729B0F786A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81019EE3-F04C-436E-944A-807D44A92C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81019EE3-F04C-436E-944A-807D44A92C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81019EE3-F04C-436E-944A-807D44A92C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81019EE3-F04C-436E-944A-807D44A92C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE625B2E-EB49-47EC-815E-6D96D8B972EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE625B2E-EB49-47EC-815E-6D96D8B972EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE625B2E-EB49-47EC-815E-6D96D8B972EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE625B2E-EB49-47EC-815E-6D96D8B972EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D535513-41B3-456A-8654-9ACC7FA262C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D535513-41B3-456A-8654-9ACC7FA262C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D535513-41B3-456A-8654-9ACC7FA262C7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D535513-41B3-456A-8654-9ACC7FA262C7}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

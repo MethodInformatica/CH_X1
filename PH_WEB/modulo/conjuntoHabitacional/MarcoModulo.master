@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Marco.master" AutoEventWireup="true" CodeFile="MarcoModulo.master.cs" Inherits="modulo_conjuntoHabitacional_MarcoModulo" %>
+
+
+<asp:Content ID="head" ContentPlaceHolderID="contentMasterHead" Runat="Server">
+<script type="text/javascript"  src="../../js/jquery-1.9.1.js"></script>
+<script type="text/javascript"  src="../../js/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript"  src="../../jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript"  src="../../js/jqueryslidemenu.js"></script>
+<script type="text/javascript"  src="../../js/bootstrap.js"></script>
+<script type="text/javascript"  src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript"  src="../../js/ui/jquery.ui.core.js"></script>
+<script type="text/javascript"  src="../../js/ui/jquery.ui.datepicker.js"></script>
+
+<asp:ContentPlaceHolder id="contentHead" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="content" ContentPlaceHolderID="contentMasterBody" Runat="Server">  
+<asp:ContentPlaceHolder id="contentBody" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
