@@ -1,17 +1,20 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="DocumentoAgregar.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_DocumentoAgregar" %>
+﻿<%@ Page UICulture="es" Culture="es-cl" Language="C#" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="DocumentoAgregar.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_DocumentoAgregar" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server"> 
 <form id="formPrincipal" runat="server" >
+<ajaxToolkit:ToolkitScriptManager runat="Server" EnableScriptGlobalization="true"
+        EnableScriptLocalization="true" ID="ScriptManager1" ScriptMode="Debug" CombineScripts="false" />
 <legend>Información Conjunto Habitacional</legend>
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="left" valign="middle">Código Conjunto Habitacional:<br/>
-            <span class="destacado1"></span><asp:TextBox ID="text_codigo_conjunto" runat="server" CssClass="form-control input-small" disabled></asp:TextBox>
+            <span class="destacado1"></span><asp:TextBox ID="txtCodigoConjunto" runat="server" CssClass="form-control input-small" disabled></asp:TextBox>
         </td>
         <td align="left" valign="middle">Nombre Conjunto Habitacional:<br/>
-	        <span class="destacado1"></span><asp:TextBox ID="text_nombre_conjunto" runat="server" disabled></asp:TextBox>
+	        <span class="destacado1"></span><asp:TextBox ID="txtNombreConjunto" runat="server" disabled></asp:TextBox>
         </td>
         <td align="left" valign="middle">Etapa:<br/>
-	        <asp:TextBox ID="text_etapa" runat="server" disabled></asp:TextBox>
+	        <asp:TextBox ID="txtEtapa" runat="server" disabled></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -42,16 +45,20 @@
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td align="left" valign="middle">Fecha Documento ( dd-mm-aaaa):<br/>
-	        <asp:TextBox ID="text_fecha_documento" runat="server" class="input-xlarge"></asp:TextBox>
-	        <asp:Label ID="errorFechaDocumento" runat="server" Text="Falta completar la fecha del documento!!" Visible="False"></asp:Label>
+	        <asp:TextBox ID="text_fecha_documento" runat="server" CssClass="form-control input-small"></asp:TextBox>
+	        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="text_fecha_documento"
+           CssClass="MyCalendar" Format="dd-MM-yyyy" PopupPosition="TopLeft" 
+                TodaysDateFormat="dd-MM-yyyy" DaysModeTitleFormat="MMM-yyyy "/>
 	        <br />
         </td>
     </tr>
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td align="left" valign="middle">Fecha Vencimiento ( dd-mm-aaaa):<br/>
-	        <asp:TextBox ID="text_fecha_vencimiento" runat="server" class="input-xlarge"></asp:TextBox>
-	        <asp:Label ID="errorVencimientoDocumento" runat="server" Text="Falta completar la fecha vencimiento del documento!!" Visible="False"></asp:Label>
+	        <asp:TextBox ID="text_fecha_vencimiento" runat="server" CssClass="form-control input-small"></asp:TextBox>
+	        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="text_fecha_vencimiento"
+           CssClass="MyCalendar" Format="dd-MM-yyyy" PopupPosition="TopLeft" 
+                TodaysDateFormat="dd-MM-yyyy" DaysModeTitleFormat="MMM-yyyy "/>
 	        <br />
         </td>
    </tr>

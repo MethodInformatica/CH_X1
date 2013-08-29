@@ -37,14 +37,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         if (this.validar())
         {
             Casa_ENT casa = this.datosCasa();
-            DetalleProducto_ENT detalleProducto = this.datosDetalleProducto();
-            detalleProducto.IdProducto = casa.IdCasa;
-
-            
-
             casa = new Casa_BSS().insertCasa(casa);
-            detalleProducto = new DetalleProducto_BSS().insertDetalleProducto(detalleProducto);
-
             Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoListado.aspx");
         }
     }
@@ -56,26 +49,19 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oCasa.Sitio = text_sitio.Text;
         oCasa.CasaEsquina = Convert.ToInt32(ddlCasaEsquina.SelectedValue);
         oCasa.Modelo = text_modelo.Text;
-        
+        oCasa.ODetalleProducto.Caracteristicas = text_caracteristica.Text;
+        oCasa.ODetalleProducto.Deslines = text_deslindes.Text;
+        oCasa.ODetalleProducto.Orientacion = Convert.ToInt32(ddlOrientacion.SelectedValue);
+        oCasa.ODetalleProducto.Direccion = text_direccion.Text;
+        oCasa.ODetalleProducto.MtsConstruidos = Convert.ToDecimal(text_mConstruido.Text);
+        oCasa.ODetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
+        oCasa.ODetalleProducto.DireccionComunal = text_direccionComunal.Text;
+        oCasa.ODetalleProducto.RolSii = text_rolSII.Text;
+        oCasa.ODetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
+        oCasa.ODetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
+        oCasa.ODetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
+        oCasa.ODetalleProducto.GastosOperacionalesUf = Convert.ToDecimal(text_gastoOperacional.Text);
         return oCasa;
-    }
-
-    public DetalleProducto_ENT datosDetalleProducto() 
-    {
-        DetalleProducto_ENT oDetalleProducto = new DetalleProducto_ENT();
-        oDetalleProducto.Caracteristicas = text_caracteristica.Text;
-        oDetalleProducto.Deslines = text_deslindes.Text;
-        oDetalleProducto.Orientacion = Convert.ToInt32(ddlOrientacion.SelectedValue);
-        oDetalleProducto.Direccion = text_direccion.Text;
-        oDetalleProducto.MtsConstruidos = Convert.ToDecimal(text_mConstruido.Text);
-        oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
-        oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
-        oDetalleProducto.RolSii = text_rolSII.Text;
-        oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
-        oDetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
-        oDetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
-        oDetalleProducto.GastosOperacionalesUf = Convert.ToDecimal(text_gastoOperacional.Text);
-        return oDetalleProducto
     }
 
     public bool validar()

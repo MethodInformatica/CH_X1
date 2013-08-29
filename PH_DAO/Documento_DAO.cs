@@ -129,7 +129,7 @@ namespace PH_DAO
             }
         }
 
-        public List<Documento_ENT> listConjuntoHabitacional()
+        public List<Documento_ENT> listConjuntoHabitacional(int idConjunto)
         {
             try
             {
@@ -138,14 +138,13 @@ namespace PH_DAO
                     sqlConn.Open();
                     SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "SP_LIST_ALL_DOCUMENTOS";
-
+                    cmd.CommandText = "SP_LIST_ALL_DOCUMENTOS_BY_IDCONJUNTO";
+                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", idConjunto);
                     List<Documento_ENT> listDocumento = new List<Documento_ENT>();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Documento_ENT datosDocumento = new Documento_ENT();
-
                         datosDocumento.IdDocumento = Convert.ToInt32(reader["id_documento"]);
                         datosDocumento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
                         datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["folio"]);
@@ -167,7 +166,7 @@ namespace PH_DAO
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar SP_LIST_ALL_DOCUMENTOS", ex);
+                throw new Exception("Error al ejecutar SP_LIST_ALL_DOCUMENTOS_BY_IDCONJUNTO", ex);
             }
         }
 

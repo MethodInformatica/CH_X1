@@ -27,9 +27,9 @@ namespace PH_BSS
             return oDocumento;
         }
 
-        public List<ConjuntoHabitacional_ENT> listConjuntoHabitacional()
+        public List<Documento_ENT> listAllByIdConjunto(int idConjunto)
         {
-            List<ConjuntoHabitacional_ENT> listConjunto = new ConjuntoHabitacional_DAO().listConjuntoHabitacional();
+            List<Documento_ENT> listConjunto = new Documento_DAO().listConjuntoHabitacional(idConjunto);
             return listConjunto;
         }
     }

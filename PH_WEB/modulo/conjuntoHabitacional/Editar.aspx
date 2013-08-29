@@ -69,14 +69,14 @@ CodeFile="Editar.aspx.cs" Inherits="modulo_conjuntoHabitacional_Editar" %>
     HeaderText="Seguimiento">
     <ContentTemplate>
          <iframe name="" frameborder="0" height="830" marginheight="0" marginwidth="0" width="100%" 
-         scrolling="no" src="Tabs/Seguimiento.aspx"></iframe>
+         scrolling="auto" src="Tabs/Seguimiento.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     <ajaxToolkit:TabPanel ID="TabPanel4" runat="server" 
     HeaderText="Detalle de Viviendas o Dpto">
     <ContentTemplate>
-         <iframe name="" frameborder="0" height="830" marginheight="0" marginwidth="0" width="100%" 
-         scrolling="no" src="Tabs/ProductoListado.aspx"></iframe>
+         <iframe name="" frameborder="0" height="1500" marginheight="0" marginwidth="0" width="100%" 
+         scrolling="auto" src="Tabs/ProductoListado.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>

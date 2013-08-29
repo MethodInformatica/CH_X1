@@ -166,24 +166,26 @@ namespace PH_DAO
                     ConjuntoHabitacional_ENT oConjunto = new ConjuntoHabitacional_ENT();
                     if (reader.Read())
                     {
-                        oConjunto.IdConjuntoHabitacional = Convert.ToInt32(reader["@id_conjunto_habitacional"].ToString());
-                        oConjunto.CodigoConjunto = reader["@codigo_conjunto"].ToString();
-                        oConjunto.NombreConjunto = reader["@nombre_conjunto"].ToString();
-                        oConjunto.Etapa = reader["@etapa"].ToString();
-                        oConjunto.DireccionConjunto = reader["@direccion_conjunto"].ToString();
-                        oConjunto.RutConstructora = reader["@rut_constructora"].ToString();
-                        oConjunto.NombreConjunto = reader["@nombre_constructora"].ToString();
-                        oConjunto.RutEmpresaVendedora = reader["@rut_empresa_vendedora"].ToString();
-                        oConjunto.NombreEmpresaVendedora = reader["@nombre_empresa_vendedora"].ToString();
-                        oConjunto.IdComunaEmpresaVendedora = Convert.ToInt32(reader["@id_comuna_empresa_vendedora"].ToString());
-                        oConjunto.DireccionEmpresaVendedora = reader["@direccion_empresa_vendedora"].ToString();
-                        oConjunto.AreaEmpresaVendedora = reader["@area_empresa_vendedora"].ToString();
-                        oConjunto.TelefonoEmpresaVendedora = reader["@telefono_empresa_vendedora"].ToString();
-                        oConjunto.EmailEmpresaVendedora = reader["@email_empresa_vendedora"].ToString();
-                        oConjunto.FechaContrato = Convert.ToDateTime(reader["@fecha_contrato"].ToString());
-                        oConjunto.FechaTerminoConstruccion = Convert.ToDateTime(reader["@fecha_termino_construccion"].ToString());
-                        oConjunto.FechaRecepcionMunicipal = Convert.ToDateTime(reader["@fecha_recepcion_municipal"].ToString());
-                        oConjunto.FechaRecepcionProhogar = Convert.ToDateTime(reader["@fecha_recepcion_prohogar"].ToString());                     
+                        oConjunto.IdConjuntoHabitacional = Convert.ToInt32(reader["id_conjunto_habitacional"]);
+                        oConjunto.CodigoConjunto = reader["codigo_conjunto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo_conjunto"]);
+                        oConjunto.NombreConjunto = reader["nombre_conjunto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre_conjunto"]);
+                        oConjunto.Etapa = reader["etapa"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["etapa"]);
+                        oConjunto.IdComunaConjunto = reader["id_comuna_conjunto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_comuna_conjunto"]);
+                        oConjunto.DireccionConjunto = reader["direccion_conjunto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["direccion_conjunto"]);
+                        oConjunto.RutConstructora = reader["rut_constructora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["rut_constructora"]);
+                        oConjunto.NombreConstructora = reader["nombre_constructora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre_constructora"]);
+                        oConjunto.RutEmpresaVendedora = reader["rut_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["rut_empresa_vendedora"]);
+                        oConjunto.NombreEmpresaVendedora = reader["nombre_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre_empresa_vendedora"]);
+                        oConjunto.RepresentanteEmpresaVendedora = reader["representante_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["representante_empresa_vendedora"]);
+                        oConjunto.IdComunaEmpresaVendedora = reader["id_comuna_empresa_vendedora"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_comuna_empresa_vendedora"]);
+                        oConjunto.DireccionEmpresaVendedora = reader["direccion_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["direccion_empresa_vendedora"]);
+                        oConjunto.AreaEmpresaVendedora = reader["area_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["area_empresa_vendedora"]);
+                        oConjunto.TelefonoEmpresaVendedora = reader["telefono_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["telefono_empresa_vendedora"]);
+                        oConjunto.EmailEmpresaVendedora = reader["email_empresa_vendedora"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["email_empresa_vendedora"]);
+                        oConjunto.FechaContrato = reader["fecha_contrato"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_contrato"]);
+                        oConjunto.FechaTerminoConstruccion = reader["fecha_termino_construccion"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_termino_construccion"]);
+                        oConjunto.FechaRecepcionMunicipal = reader["fecha_recepcion_municipal"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_recepcion_municipal"]);
+                        oConjunto.FechaRecepcionProhogar = reader["fecha_recepcion_prohogar"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_recepcion_prohogar"]);
 
                         return oConjunto;
                     }

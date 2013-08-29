@@ -90,6 +90,15 @@
                 <asp:TextBox ID="text_rolSII" runat="server" width="100"></asp:TextBox>
             </td>
         </tr>
+        <tr>
+           <td align="left" valign="middle" colspan="4">Estado del Producto:<br/>
+                <asp:DropDownList ID="ddlEstadoProducto" runat="server" class="input-medium">
+	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
+	                <asp:ListItem Value="1" Text="Reservado"></asp:ListItem>
+	                <asp:ListItem Value="2" Text="Asociado a Cliente"></asp:ListItem>
+	            </asp:DropDownList>
+           </td>
+        </tr>
     </table>
 
     <legend>Valores</legend>

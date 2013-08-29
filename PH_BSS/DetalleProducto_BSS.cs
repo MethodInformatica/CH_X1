@@ -13,9 +13,9 @@ namespace PH_BSS
         public DetalleProducto_BSS() { 
         }
 
-        public DetalleProducto_ENT insertDetalleProducto(DetalleProducto_ENT datosDetalleProducto)
+        public DetalleProducto_ENT insertDetalleProducto(Cliente_ENT datosCliente, DetalleProducto_ENT datosDetalleProducto)
         {
-            DetalleProducto_ENT oDetalleProducto = new DetalleProducto_DAO().insert(datosDetalleProducto);
+            DetalleProducto_ENT oDetalleProducto = new DetalleProducto_DAO().insert(datosCliente, datosDetalleProducto);
             return oDetalleProducto;
         }
 

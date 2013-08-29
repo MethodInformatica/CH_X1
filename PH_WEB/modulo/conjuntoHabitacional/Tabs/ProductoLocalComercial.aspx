@@ -1,4 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProductoLocalComercial.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProductoLocalComercial.aspx.cs" 
+Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" %>
+ <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server">
 <form id="formPrincipal" runat="server">
 <h1>INGRESO LOCAL COMERCIAL</h1>
 <legend>Información Conjunto Habitacional <span style="float:right; width: 20%; text-align:left";>
@@ -61,6 +64,15 @@
         </td>
         <td align="left" valign="middle">&nbsp</td>
     </tr>
+    <tr>
+           <td align="left" valign="middle" colspan="3">Estado del Producto:<br/>
+                <asp:DropDownList ID="ddlEstadoProducto" runat="server" class="input-medium">
+	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
+	                <asp:ListItem Value="1" Text="Reservado"></asp:ListItem>
+	                <asp:ListItem Value="2" Text="Asociado a Cliente"></asp:ListItem>
+	            </asp:DropDownList>
+           </td>
+        </tr>
 </table>
 
  <legend>Valores</legend>
@@ -143,3 +155,4 @@
         <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">Información Obligatoria.</span>
   
 </form>
+</asp:Content>

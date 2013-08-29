@@ -5,13 +5,13 @@
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="left" valign="middle">Código Conjunto Habitacional:<br/>
-            <span class="destacado1"></span><asp:TextBox ID="text_codigo_conjunto" runat="server" CssClass="form-control input-small" disabled></asp:TextBox>
+            <span class="destacado1"></span><asp:TextBox ID="txtCodigoConjunto" runat="server" CssClass="form-control input-small" disabled></asp:TextBox>
         </td>
         <td align="left" valign="middle">Nombre Conjunto Habitacional:<br/>
-	        <span class="destacado1"></span><asp:TextBox ID="text_nombre_conjunto" runat="server" disabled></asp:TextBox>
+	        <span class="destacado1"></span><asp:TextBox ID="txtNombreConjunto" runat="server" disabled></asp:TextBox>
         </td>
         <td align="left" valign="middle">Etapa:<br/>
-	        <asp:TextBox ID="text_etapa" runat="server" disabled></asp:TextBox>
+	        <asp:TextBox ID="txtEtapa" runat="server" disabled></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -30,36 +30,21 @@
             <tr>
                 <td valign="top">Comentario:</td>
                 <td valign="top">&nbsp</td>
-                <td colspan="2"><textarea rows="5" class="input-xxlarge"></textarea></td>
+                <td colspan="2"><textarea rows="5" class="input-xxlarge" runat="server" id="txtComentario"></textarea></td>
             </tr>
-            <tr align="right"><td colspan="3"><button type="submit" class="btn btn-primary">Ingresar Comentario</button></td></tr>
+            <tr align="right"><td colspan="3">
+            <asp:Button CssClass="btn btn-primary" Text="Ingresar Comentario" runat="server" 
+                    ID="btnComentario" onclick="btnComentario_Click" />
+            </td></tr>
         </table>
         
         <legend>Listado de comentarios</legend>
-        <table class="table table-striped">
+        <table class="table table-striped" runat="server" id="tablaSeguimiento">
             <thead><th><button type="submit" class="btn">Actualizar</button></th></thead>
-            <tbody>
-                <tr>
-                    <td>
-                    <h4>maviles - 22/05/2013 14:00</h4>
-                    <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <h4>maviles - 22/05/2013 14:00</h4>
-                    <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <h4>maviles - 22/05/2013 14:00</h4>
-                    <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </td>
-                </tr>
+            <tbody>                
             </tbody>
         </table>
-        <div class="pagination">
+        <div class="pagination" style="visibility:hidden">
         <ul>
             <li><a href="#">Anterior</a></li>
             <li><a href="#">1</a></li>

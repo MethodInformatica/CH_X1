@@ -39,7 +39,7 @@ public partial class modulo_conjuntoHabitacional_Listado : System.Web.UI.Page
             row.Cells.Add(new HtmlTableCell() { InnerHtml = conjunto.NombreComunaConjunto });
             row.Cells.Add(new HtmlTableCell()
             {
-                InnerHtml = "<button class='btn btn-mini btn-primary' type='button' onclick=\"JAVASCRIPT:ingresarCJ(" + conjunto.CodigoConjunto + ",'"+new Utilidad().getMD5(conjunto.CodigoConjunto,DateTime.Now.ToShortDateString())+"');\">Ingresar</button> " +
+                InnerHtml = "<button class='btn btn-mini btn-primary' type='button' onclick=\"JAVASCRIPT:ingresarCJ(" + conjunto.IdConjuntoHabitacional + ",'" + new Utilidad().getMD5(conjunto.IdConjuntoHabitacional.ToString(), DateTime.Now.ToShortDateString()) + "');\">Ingresar</button> " +
                     "<button class='btn btn-mini btn-danger' type='button' onclick=\"JAVASCRIPT:confirmarEliminarCJ(" + conjunto.CodigoConjunto + ");\">Eliminar</button>"
             });
             i++;

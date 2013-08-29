@@ -12,7 +12,7 @@ namespace PH_ENT
         private string sitio;
         private int casaEsquina;
         private string modelo;
-        private DetalleProducto_ENT oDetalleProducto = new DetalleProducto_ENT();
+        private DetalleProducto_ENT oDetalleProducto;
 
         public int IdCasa
         {

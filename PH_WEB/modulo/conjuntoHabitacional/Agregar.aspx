@@ -11,7 +11,7 @@
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="left" valign="middle">Código Conjunto Habitacional:<br/>
-            <span class="destacado1">*</span><asp:TextBox ID="txtCodigoConjunto" runat="server" CssClass="form-control input-small" disabled></asp:TextBox>
+            <span class="destacado1">*</span><asp:TextBox ID="txtCodigoConjunto" runat="server" CssClass="form-control input-small" MaxLength="10"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Nombre Conjunto Habitacional:<br/>
 	        <span class="destacado1">*</span><asp:TextBox ID="txtNombreConjunto" runat="server" MaxLength="30"></asp:TextBox>

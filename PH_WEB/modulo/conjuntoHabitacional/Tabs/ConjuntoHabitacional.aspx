@@ -19,7 +19,7 @@
 	        <span class="destacado1"></span><asp:TextBox ID="txtNombreConjunto" runat="server" disabled></asp:TextBox>
         </td>
         <td align="left" valign="middle">Etapa:<br/>
-	        <asp:TextBox ID="txtEtapaConjunto" runat="server" disabled></asp:TextBox>
+	        <asp:TextBox ID="txtEtapa" runat="server" disabled></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -174,7 +174,8 @@
 <p class="separador"></p>    
 <br/>
 
-    <asp:Button ID="btnGrabar" runat="server" Text="Guardar" class="btn btn-large btn-success"/>
+    <asp:Button ID="btnGrabar" runat="server" Text="Guardar" 
+            class="btn btn-large btn-success" onclick="btnGrabar_Click"/>
     <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
     <br/>
     <div class="alert alert-block">

@@ -12,7 +12,7 @@ namespace PH_DAO
 
         private int error;
 
-        public DetalleProducto_ENT insert(DetalleProducto_ENT datosDetalleProducto)
+        public DetalleProducto_ENT insert(Cliente_ENT datosCliente, DetalleProducto_ENT datosDetalleProducto)
         {
             try
             {
