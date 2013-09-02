@@ -132,9 +132,9 @@
 	            <asp:TextBox ID="text_emailCliente" runat="server" Width="150" disabled></asp:TextBox>
             </td>
             <td align="left" valign="middle">Teléfono :<br/>
-	            <asp:TextBox ID="text_telefonoCliente" runat="server" Width="20" disabled></asp:TextBox>
+	            <asp:TextBox ID="text_telefonoCliente_Area" runat="server" Width="20" disabled></asp:TextBox>
 	             - 
-	             <asp:TextBox ID="TextBox30" runat="server" Width="60" disabled></asp:TextBox>
+	             <asp:TextBox ID="text_telefonoCliente_Telefono" runat="server" Width="60" disabled></asp:TextBox>
             </td>
         </tr>
     </table>
@@ -174,8 +174,7 @@
     <p class="separador"></p>  
     <br/>
 
-        <asp:Button ID="btn_grabar" runat="server" Text="Guardar" 
-                    class="btn btn-large btn-success" onclick="btn_grabar_Click" />
+        <asp:Button ID="btn_grabar" runat="server" Text="Guardar" class="btn btn-large btn-success" onclick="btn_grabar_Click" />
         <asp:Button ID="btn_limpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
         <br/>
         <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">Información Obligatoria.</span>

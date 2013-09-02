@@ -33,16 +33,16 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega" Master
 <table border="1" cellpadding="0" cellspacing="0" width="90%">
     <tr>
         <td align="left" valign="middle">N° Est./Bod.:<br/>
-            <asp:TextBox ID="TextBox19" runat="server" width="100"></asp:TextBox>
+            <asp:TextBox ID="text_nEstaBode" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Total Mts2 Terreno (EJ: 70,43) :<br/>
-	        <asp:TextBox ID="TextBox20" runat="server" width="100"></asp:TextBox>
+	        <asp:TextBox ID="text_mtsTerreno" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Dirección Comunal:<br/>
-	        <asp:TextBox ID="TextBox1" runat="server" width="100"></asp:TextBox>
+	        <asp:TextBox ID="text_dirComunal" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Rol SII:<br/>
-	        <asp:TextBox ID="TextBox2" runat="server" width="100"></asp:TextBox>
+	        <asp:TextBox ID="text_rolSII" runat="server" width="100"></asp:TextBox>
         </td>
     </tr>
 </table>
@@ -52,7 +52,7 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega" Master
     <tr>
         <td valign="top">Característica:</td>
         <td valign="top">&nbsp</td>
-        <td colspan="3"><textarea rows="5" class="input-xxlarge"></textarea></td>
+        <td colspan="3"><textarea rows="5" class="input-xxlarge" id="text_caracteristicas"></textarea></td>
     </tr>
     <tr>
            <td align="left" valign="middle" colspan="5">Estado del Producto:<br/>
@@ -139,7 +139,7 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega" Master
     <br/>
 
         <asp:Button ID="btn_grabar" runat="server" Text="Guardar" 
-                    class="btn btn-large btn-success" />
+        class="btn btn-large btn-success" onclick="btn_grabar_Click" />
         <asp:Button ID="btn_limpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
         <br/>
         <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">Información Obligatoria.</span>

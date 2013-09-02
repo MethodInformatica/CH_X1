@@ -17,4 +17,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
     {
 
     }
+    protected void btn_grabar_Click(object sender, EventArgs e)
+    {
+
+    }
 }
