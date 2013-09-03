@@ -33,9 +33,13 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
             //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
             //this.cargarDatosConjunto(oConjunto); 
             codProducto = "13001";
-            idConjuntoHabitacional = 21;
-            tipoProducto = 2;
-            nombreProducto = "DEPARTAMENTO";
+
+            int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
+            TipoProducto_ENT oTipoProducto = new TipoProducto_ENT();
+            oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
+            tipoProducto = oTipoProducto.IdTipoProducto;
+            nombreProducto = oTipoProducto.Nombre;
+
             this.cargarDatosConjunto();
             this.traeDatos(Convert.ToInt32(Request.QueryString["x"]));
         }

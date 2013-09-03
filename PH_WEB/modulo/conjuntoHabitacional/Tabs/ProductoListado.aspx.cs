@@ -44,24 +44,23 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
 
         if (tipo == 0)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe seleccionar un tipo de producto!!!"));
+            ClientScript.RegisterStartupScript(this.GetType(), "", JavaScript.alert("Debe seleccionar un tipo de producto!!!"));
         }
-        else if (tipo == 1) 
+        else if (tipo == 1 || tipo == 2 || tipo == 3) 
         {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasa.aspx");
-        }
-        else if (tipo == 2)
-        {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDepto.aspx");
-        }
-        else if (tipo == 3)
-        {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodega.aspx");
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasa.aspx?t=" + tipo + "");
         }
         else if (tipo == 4)
         {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercial.aspx");
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDepto.aspx?t=" + tipo + "");
+        }
+        else if (tipo == 5 || tipo == 6)
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodega.aspx?t=" + tipo + "");
+        }
+        else if (tipo == 7)
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercial.aspx?t=" + tipo + "");
         }
     }
 

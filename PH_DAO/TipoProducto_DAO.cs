@@ -101,7 +101,7 @@ namespace PH_DAO
             }
         }
 
-        public TipoProducto_ENT getForIdTipoProducto(TipoProducto_ENT datosTipoProducto)
+        public TipoProducto_ENT getForIdTipoProducto(int idTipoProducto)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace PH_DAO
                     SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "SP_GET_TIPOPRODUCTO_IDTIPOPRODUCTO";
-                    cmd.Parameters.AddWithValue("@id_tipo_producto", datosTipoProducto.IdTipoProducto);
+                    cmd.Parameters.AddWithValue("@id_tipo_producto", idTipoProducto);
                     SqlDataReader reader = cmd.ExecuteReader();
                     TipoProducto_ENT oTipoProducto = new TipoProducto_ENT();
                     if (reader.Read())

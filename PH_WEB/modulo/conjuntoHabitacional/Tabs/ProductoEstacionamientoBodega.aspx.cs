@@ -28,8 +28,13 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         //this.cargarDatosConjunto(oConjunto); 
         codProducto = "13001";
         idConjuntoHabitacional = 21;
-        tipoProducto = 3;
-        nombreProducto = "Estacionamiento/Bodega";
+
+        int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
+        TipoProducto_ENT oTipoProducto = new TipoProducto_ENT();
+        oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
+        tipoProducto = oTipoProducto.IdTipoProducto;
+        nombreProducto = oTipoProducto.Nombre;
+
         this.cargarDatosConjunto(); 
 
     }

@@ -7,8 +7,8 @@
             return false;
         }
     }
-    function centralTabs(x,y,z,i) {
-        window.location.href = "centralTabs.aspx?x=" + x + "&y=" + y + "&z=" + z + "&i=" + i + " ";
+    function centralTabs(x,y,t,i) {
+        window.location.href = "centralTabs.aspx?x=" + x + "&y=" + y + "&t=" + t + "&i=" + i + " ";
     }
     
     
@@ -40,10 +40,13 @@
                 <td align="left" valign="middle">Tipo producto:<br/>
                     <asp:DropDownList ID="ddlTipoProducto" runat="server" class="input-medium">
                         <asp:ListItem Text="Seleccione" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Casa" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Departamento" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Estacionamiento/Bodega" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Local Comercial" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Casas Aisladas" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Casas Pareadas" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Casas Compuestas" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Departamentos" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Bodegas" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="Estacionamiento" Value="6"></asp:ListItem>
+                        <asp:ListItem Text="Locales Comerciales" Value="7"></asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td align="left" valign="middle" colspan="2"><br/>
@@ -65,12 +68,14 @@
                 <td align="left" valign="middle">Tipo Producto:<br/>
 	                <asp:DropDownList ID="ddlTipoProducto_Busqueda" runat="server" class="input-medium">
                         <asp:ListItem Text="Seleccione" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Casa" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Departamento" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Estacionamiento/Bodega" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Local Comercial" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Casas Aisladas" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Casas Pareadas" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Casas Compuestas" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Departamentos" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Bodegas" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="Estacionamiento" Value="6"></asp:ListItem>
+                        <asp:ListItem Text="Locales Comerciales" Value="7"></asp:ListItem>
                     </asp:DropDownList>
-                </asp:DropDownList>
                 </td>
                 <td align="left" valign="middle">Monto:<br/>
                     <asp:TextBox ID="text_monto_busqueda" runat="server"></asp:TextBox>

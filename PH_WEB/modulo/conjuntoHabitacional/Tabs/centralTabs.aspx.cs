@@ -19,7 +19,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_editarTabs : System.Web.UI
     {
         String IdProducto = Request.QueryString["x"];
         String IdReferencia = Request.QueryString["y"];
-        String IdTipoProducto = Request.QueryString["z"];
+        String IdTipoProducto = Request.QueryString["t"];
         String accion = Request.QueryString["i"];
 
         if (accion == "1")
@@ -38,37 +38,39 @@ public partial class modulo_conjuntoHabitacional_Tabs_editarTabs : System.Web.UI
 
     protected void visualizarDatos(String IdProducto, String IdReferencia, String IdTipoProducto)
     {
-        if (IdTipoProducto == "1")
+        if (IdTipoProducto == "1" || IdTipoProducto == "2" || IdTipoProducto == "3")
         {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasaVisualizar.aspx?x=" + IdProducto);
-        }
-        else if (IdTipoProducto == "2")
-        {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDeptoVisualizar.aspx?x=" + IdProducto);
-        }
-        else if (IdTipoProducto == "3")
-        {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodegaVisualizar.aspx?x=" + IdProducto);
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasaVisualizar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
         }
         else if (IdTipoProducto == "4")
         {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercialVisualizar.aspx?x=" + IdProducto);
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDeptoVisualizar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
+        }
+        else if (IdTipoProducto == "5" || IdTipoProducto == "6")
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodegaVisualizar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
+        }
+        else if (IdTipoProducto == "7")
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercialVisualizar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
         }
     }
 
     protected void editarDatos(String IdProducto, String IdReferencia, String IdTipoProducto)
     {
-        if (IdTipoProducto == "1") {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasaEditar.aspx?x=" + IdProducto);
-        }
-        else if (IdTipoProducto == "2") {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDeptoEditar.aspx?x=" + IdProducto);
-        }
-        else if (IdTipoProducto == "3") {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodegaEditar.aspx?x=" + IdProducto);
+        if (IdTipoProducto == "1" || IdTipoProducto == "2" || IdTipoProducto == "3")
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoCasaEditar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
         }
         else if (IdTipoProducto == "4") {
-            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercialEditar.aspx?x=" + IdProducto);
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoDeptoEditar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
+        }
+        else if (IdTipoProducto == "5" || IdTipoProducto == "6")
+        {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoEstacionamientoBodegaEditar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
+        }
+        else if (IdTipoProducto == "7") {
+            Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoLocalComercialEditar.aspx?x=" + IdProducto + "&t=" + IdTipoProducto + "");
         }
     }
 
