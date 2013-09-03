@@ -34,7 +34,7 @@ public partial class views_ingresoCasas : System.Web.UI.Page
     {
         Casa_ENT oCasa = new Casa_BSS().insertCasa(this.datosCasa());
         this.datosDetalleProducto().IdProducto = oCasa.IdCasa;
-        DetalleProducto_ENT oDetalleProducto = new DetalleProducto_BSS().insertDetalleProducto(this.datosClientes(), this.datosDetalleProducto());
+        DetalleProducto_ENT oDetalleProducto = new DetalleProducto_BSS().insertDetalleProducto(this.datosDetalleProducto());
     }
 
     public Casa_ENT datosCasa()
@@ -72,13 +72,6 @@ public partial class views_ingresoCasas : System.Web.UI.Page
         detalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
         detalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
         detalleProducto.GastosOperacionalesUf = Convert.ToDecimal(text_gastoOperacional.Text);
-        detalleProducto.NumeroReserva = Convert.ToInt32(text_nReserva.Text);
-        detalleProducto.FechaReserva = Convert.ToDateTime(text_fechaReserva.Text);
-        detalleProducto.NumeroCartaOferta = Convert.ToInt32(text_numeroCartaOferta.Text);
-        detalleProducto.FechaCartaOferta = Convert.ToDateTime(text_fechaCartaOferta.Text);
-        detalleProducto.EjecutivoVenta = Convert.ToInt32(text_ejecutivoVenta.Text);
-        detalleProducto.FechaVenta = Convert.ToDateTime(text_fechaVenta.Text);
-        detalleProducto.CodigoProyectoCliente = text_codigoProyecto.Text;
         return detalleProducto;
     }
 

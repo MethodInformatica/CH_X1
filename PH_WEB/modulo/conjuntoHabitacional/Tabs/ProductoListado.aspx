@@ -48,15 +48,20 @@
         <table border="1" cellpadding="1" cellspacing="1" width="100%">
             <tr>
                 <td align="left" valign="middle">Código Producto:<br/>
-                    <asp:TextBox ID="TextBox24" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="text_codigoProducto_Busqueda" runat="server"></asp:TextBox>
                 </td>
                 <td align="left" valign="middle">Tipo Producto:<br/>
-	                <asp:DropDownList ID="DropDownList11" runat="server">
-                    <asp:ListItem Value="Tipo"></asp:ListItem>
+	                <asp:DropDownList ID="ddlTipoProducto_Busqueda" runat="server" class="input-medium">
+                        <asp:ListItem Text="Seleccione" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Casa" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Departamento" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Estacionamiento/Bodega" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Local Comercial" Value="4"></asp:ListItem>
+                    </asp:DropDownList>
                 </asp:DropDownList>
                 </td>
                 <td align="left" valign="middle">Monto:<br/>
-                    <asp:TextBox ID="TextBox25" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="text_monto_busqueda" runat="server"></asp:TextBox>
                 </td>
                 <td valign="middle"><button type="submit" class="btn btn-primary">Buscar Producto</button></td>
             </tr>

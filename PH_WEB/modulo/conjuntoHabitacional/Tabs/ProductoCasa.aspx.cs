@@ -15,10 +15,21 @@ using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.UI.Page
 {
+    public string codProducto;
+    public int idConjuntoHabitacional;
+    public int tipoProducto;
+    public string nombreProducto;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //ConjuntoHabitacional_ENT oConjunto = (ConjuntoHabitacional_ENT)Session["sessionConjuntoHabitacional"];
+        //codProducto = oConjunto.CodigoConjunto;
+        //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
         //this.cargarDatosConjunto(oConjunto); 
+        codProducto = "13001";
+        idConjuntoHabitacional = 21;
+        tipoProducto = 1;
+        nombreProducto = "CASA";
         this.cargarDatosConjunto(); 
     }
 
@@ -28,21 +39,39 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = "";
-        text_tipoProducto.Text = "CASA";
+        text_codProducto.Text = codProducto;
+        text_tipoProducto.Text = nombreProducto;
     } 
 
     protected void btn_grabar_Click(object sender, EventArgs e)
     {
         if (this.validar())
         {
+            
             Casa_ENT casa = this.datosCasa();
-            DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
             casa = new Casa_BSS().insertCasa(casa);
-            oDetalleProducto.IdProducto = casa.IdCasa;
+
+            Producto_ENT oProducto = this.insertProducto(casa.IdCasa);
+            oProducto = new Producto_BSS().insert(oProducto);
+            
+            DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
+            oDetalleProducto.IdProducto = oProducto.IdProducto;
+
             oDetalleProducto = new DetalleProducto_BSS().insertDetalleProducto(oDetalleProducto);
+
             Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoListado.aspx");
         }
+    }
+
+    public Producto_ENT insertProducto(int idCasa) {
+        Producto_ENT oProducto = new Producto_ENT();
+        oProducto.CodigoProducto = codProducto;
+        oProducto.IdTipoProducto = tipoProducto;
+        oProducto.IdConjuntoHabitacional = idConjuntoHabitacional;
+        oProducto.RutCliente = "";//Vacio
+        oProducto.IdReferencia = idCasa;
+
+        return oProducto;
     }
 
     public DetalleProducto_ENT datosDetalleProducto()
@@ -72,7 +101,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oCasa.CasaEsquina = Convert.ToInt32(ddlCasaEsquina.SelectedValue);
         oCasa.Modelo = text_modelo.Text;
 
-        
         return oCasa;
     }
 

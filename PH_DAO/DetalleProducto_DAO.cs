@@ -109,7 +109,7 @@ namespace PH_DAO
                     sqlConn.Open();
                     SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "SP_UPDATE_DETALLEPRODCUTO_IDDETALLE";
+                    cmd.CommandText = "SP_UPDATE_DETALLEPRODUCTO_IDDETALLE";
 
                     cmd.Parameters.AddWithValue("@id_detalle", detalleProducto.IdDetalle);
                     cmd.Parameters.AddWithValue("@id_producto", detalleProducto.IdProducto);
