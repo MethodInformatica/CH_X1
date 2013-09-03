@@ -1,6 +1,13 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="ProductoListado.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ProductoListado" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server"> 
 <form id="formPrincipal" runat="server">
+<script>
+    function confirmarEliminarDoc(ic) {
+        if (confirm("Esta seguro de eliminar el Documento '" + ic + "'?")) {
+            return false;
+        }
+    }
+</script>
    <legend>Información Conjunto Habitacional</legend>
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -68,38 +75,14 @@
         </table>
         
         <legend>Listado viviendas o departamentos</legend>
-        <table class="table table-striped">
+        <table class="table table-striped" id="tablaProductos" runat="server">
             <thead>
                 <th>#</th><th>Código Producto</th><th>Tipo Producto</th><th>Monto (UF)</th><th>Rut Cliente</th><th>Acciones</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td><td>CA001</td><td>Casa Aislada</td><td>850</td><td>11111111-1</td>
-                    <td>
-                        <button class="btn btn-mini btn-info" type="button">Visualizar</button>
-                        <button class="btn btn-mini btn-warning" type="button">Editar</button>
-                        <button class="btn btn-mini btn-danger" type="button">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td><td>CA002</td><td>Casa Pareada</td><td>800</td><td>22222222-1</td>
-                    <td>
-                        <button class="btn btn-mini btn-info" type="button">Visualizar</button>
-                        <button class="btn btn-mini btn-warning" type="button">Editar</button>
-                        <button class="btn btn-mini btn-danger" type="button">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td><td>CA003</td><td>Casa Pareada</td><td>780</td><td>33333333-1</td>
-                    <td>
-                        <button class="btn btn-mini btn-info" type="button">Visualizar</button>
-                        <button class="btn btn-mini btn-warning" type="button">Editar</button>
-                        <button class="btn btn-mini btn-danger" type="button">Eliminar</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
-        <div class="pagination">
+        <div class="pagination" id="paginador" runat="server" style="visibility:hidden">
         <ul>
             <li><a href="#">Anterior</a></li>
             <li><a href="#">1</a></li>

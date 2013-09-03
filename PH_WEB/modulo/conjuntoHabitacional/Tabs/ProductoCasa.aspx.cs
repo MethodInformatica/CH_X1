@@ -47,7 +47,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
     {
         if (this.validar())
         {
-            
             Casa_ENT casa = this.datosCasa();
             casa = new Casa_BSS().insertCasa(casa);
 
@@ -85,7 +84,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
         oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
         oDetalleProducto.RolSii = text_rolSII.Text;
-
+        oDetalleProducto.EstadoProducto = Convert.ToInt32(ddlEstadoProducto.SelectedValue);
         oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
         oDetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
         oDetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);

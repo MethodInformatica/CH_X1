@@ -36,10 +36,10 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega" Master
             <asp:TextBox ID="text_nEstaBode" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Total Mts2 Terreno (EJ: 70,43) :<br/>
-	        <asp:TextBox ID="text_mtsTerreno" runat="server" width="100"></asp:TextBox>
+	        <asp:TextBox ID="text_mTerreno" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Dirección Comunal:<br/>
-	        <asp:TextBox ID="text_dirComunal" runat="server" width="100"></asp:TextBox>
+	        <asp:TextBox ID="text_direccionComunal" runat="server" width="100"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Rol SII:<br/>
 	        <asp:TextBox ID="text_rolSII" runat="server" width="100"></asp:TextBox>
@@ -52,7 +52,7 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega" Master
     <tr>
         <td valign="top">Característica:</td>
         <td valign="top">&nbsp</td>
-        <td colspan="3"><textarea rows="5" class="input-xxlarge" id="text_caracteristicas"></textarea></td>
+        <td colspan="3"><textarea rows="5" class="input-xxlarge" id="text_caracteristicas" runat="server"></textarea></td>
     </tr>
     <tr>
            <td align="left" valign="middle" colspan="5">Estado del Producto:<br/>

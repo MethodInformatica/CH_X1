@@ -12,7 +12,7 @@ namespace PH_BSS
         public EstacionamientoBodega_BSS() { 
         }
 
-        public EstacionamientoBodega_ENT insertDepartamento(EstacionamientoBodega_ENT datosEstacionamientoBodega)
+        public EstacionamientoBodega_ENT insertEstacionamientoBodega(EstacionamientoBodega_ENT datosEstacionamientoBodega)
         {
             EstacionamientoBodega_ENT oEstacionamientoBodega = new EstacionamientoBodega_DAO().insert(datosEstacionamientoBodega);
             return oEstacionamientoBodega;

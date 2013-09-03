@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using PH_ENT;
+using System.Collections.Generic;
+using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.Web.UI.Page
 {
@@ -18,6 +20,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
     {
         //ConjuntoHabitacional_ENT oConjunto = (ConjuntoHabitacional_ENT)Session["sessionConjuntoHabitacional"];
         //this.cargarDatosConjunto(oConjunto); 
+        this.cargaListado();
     }
 
     protected void cargarDatosConjunto(ConjuntoHabitacional_ENT oConjunto)
@@ -58,5 +61,27 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
     {
         ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Funcionalidad en construcción!!!"));
+    }
+
+    public void cargaListado() {
+
+        List<Producto_ENT> productos = new Producto_BSS().listAllProductos();
+        int i = 1;
+        foreach (Producto_ENT producto in productos)
+        {
+            HtmlTableRow row = new HtmlTableRow();
+            row.Cells.Add(new HtmlTableCell() { InnerHtml = i.ToString() });
+            row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.CodigoProducto});
+            row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.TipoProducto });
+            row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.ValoUF});
+            row.Cells.Add(new HtmlTableCell()
+            {
+                InnerHtml = "<button class='btn btn-mini btn-info' type='button'>Visualizar</button>&nbsp &nbsp" +
+                    "<button class='btn btn-mini btn-warning' type='button'>Editar</button>&nbsp &nbsp" +
+                    "<button class='btn btn-mini btn-danger' type='button' onclick=\"JaVASCRIPT:confirmarEliminarDoc('" + producto.CodigoProducto+ "');\">Eliminar</button>"
+            });
+            i++;
+            tablaProductos.Rows.Add(row);
+        }
     }
 }

@@ -144,7 +144,7 @@ namespace PH_DAO
             }
         }
 
-        public List<Producto_ENT> listProducto(Producto_ENT datosProducto)
+        public List<Producto_ENT> listProducto()
         {
             try
             {
@@ -157,16 +157,16 @@ namespace PH_DAO
 
                     List<Producto_ENT> listProducto = new List<Producto_ENT>();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Producto_ENT oProducto = new Producto_ENT();
 
                         oProducto.IdProducto = Convert.ToInt32(reader["id_producto"]);
-                        oProducto.CodigoProducto = reader["codigo_producto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo_producto"]);
-                        oProducto.IdTipoProducto = reader["id_tipo_producto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_tipo_producto"]);
                         oProducto.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
-                        oProducto.RutCliente = reader["rut_cliente"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["rut_cliente"]);
                         oProducto.IdReferencia = reader["id_referencia"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_referencia"]);
+                        oProducto.CodigoProducto = reader["codigo_producto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo_producto"]);
+                        oProducto.TipoProducto = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
+                        oProducto.ValoUF = reader["valor_uf"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["valor_uf"]);
 
                         listProducto.Add(oProducto);
                     }

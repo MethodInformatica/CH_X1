@@ -32,7 +32,7 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" MasterPageFil
 <table border="1" cellpadding="0" cellspacing="0" style="margin: 0 0 15px 0;">
     <tr>
         <td align="left" valign="middle">Sitio:<br/>
-            <asp:TextBox ID="TextBox19" runat="server"></asp:TextBox>
+            <asp:TextBox ID="text_sitio" runat="server"></asp:TextBox>
         </td>
     </tr>
 </table>
@@ -40,27 +40,31 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" MasterPageFil
 <legend>Datos Generales </legend>
 <table>
     <tr>
-        <td colspan="3">Característica:<br /><textarea rows="5" class="input-xxlarge"></textarea></td>
+        <td colspan="3">Característica:<br /><textarea rows="5" class="input-xxlarge" id="text_caracteristicas" runat="server"></textarea></td>
     </tr>
     <tr>
         <td align="left" valign="middle">Orientación:<br/>
-            <asp:DropDownList ID="DropDownList3" runat="server" class="input-medium">
-                <asp:ListItem Value="Sur"></asp:ListItem>
-            </asp:DropDownList>
+            <asp:DropDownList ID="ddlOrientacion" runat="server" class="input-medium">
+	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
+	                <asp:ListItem Value="1" Text="Norte"></asp:ListItem>
+	                <asp:ListItem Value="2" Text="Sur"></asp:ListItem>
+	                <asp:ListItem Value="3" Text="Este"></asp:ListItem>
+	                <asp:ListItem Value="4" Text="Oeste"></asp:ListItem>
+	        </asp:DropDownList>
         </td>
         <td align="left" valign="middle">Total Mts2 Construido (EJ: 70,43):<br/>
-            <asp:TextBox ID="TextBox21" runat="server" width="80"></asp:TextBox>
+            <asp:TextBox ID="text_mConstruido" runat="server" width="80"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Total Mts2 Terreno (Ej: 100,23):<br/>
-            <asp:TextBox ID="TextBox1" runat="server" width="80"></asp:TextBox>
+            <asp:TextBox ID="text_mTerreno" runat="server" width="80"></asp:TextBox>
         </td>
     </tr>
     <tr>
         <td align="left" valign="middle">Dirección Comunal:<br/>
-            <asp:TextBox ID="TextBox23" runat="server" width="120"></asp:TextBox>
+            <asp:TextBox ID="text_direccionComunal" runat="server" width="120"></asp:TextBox>
         </td>
         <td align="left" valign="middle">Rol SII:<br/>
-            <asp:TextBox ID="TextBox22" runat="server" width="80"></asp:TextBox>
+            <asp:TextBox ID="text_rolSII" runat="server" width="80"></asp:TextBox>
         </td>
         <td align="left" valign="middle">&nbsp</td>
     </tr>
@@ -106,9 +110,9 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" MasterPageFil
 	            <asp:TextBox ID="text_emailCliente" runat="server" Width="150" disabled></asp:TextBox>
             </td>
             <td align="left" valign="middle">Teléfono :<br/>
-	            <asp:TextBox ID="text_telefonoCliente" runat="server" Width="20" disabled></asp:TextBox>
+	            <asp:TextBox ID="text_telefonoCliente_Area" runat="server" Width="20" disabled></asp:TextBox>
 	             - 
-	             <asp:TextBox ID="TextBox30" runat="server" Width="60" disabled></asp:TextBox>
+	             <asp:TextBox ID="text_telefonoCliente_Telefono" runat="server" Width="60" disabled></asp:TextBox>
             </td>
         </tr>
     </table>
@@ -148,8 +152,7 @@ Inherits="modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial" MasterPageFil
     <p class="separador"></p>  
     <br/>
 
-        <asp:Button ID="btn_grabar" runat="server" Text="Guardar" 
-                    class="btn btn-large btn-success" />
+        <asp:Button ID="btn_grabar" runat="server" Text="Guardar" class="btn btn-large btn-success" onclick="btn_grabar_Click" />
         <asp:Button ID="btn_limpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
         <br/>
         <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">Información Obligatoria.</span>

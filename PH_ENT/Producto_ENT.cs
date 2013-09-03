@@ -14,6 +14,9 @@ namespace PH_ENT
         private string rutCliente;
         private int idReferencia;
 
+        private string tipoProducto;
+        private string valoUF;
+
         public int IdProducto
         {
             get { return idProducto; }
@@ -48,6 +51,18 @@ namespace PH_ENT
         {
             get { return idReferencia; }
             set { idReferencia = value; }
+        }
+
+        public string TipoProducto
+        {
+            get { return tipoProducto; }
+            set { tipoProducto = value; }
+        }
+
+        public string ValoUF
+        {
+            get { return valoUF; }
+            set { valoUF = value; }
         }
     }
 }

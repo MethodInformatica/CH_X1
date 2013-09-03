@@ -23,9 +23,6 @@ namespace PH_DAO
                     cmd.CommandText = "SP_INSERT_ESTACIONAMIENTOBODEGA";
 
                     cmd.Parameters.AddWithValue("@numero_est_bod", datosEstacionamientoBodega.NumeroEstBod);
-                    cmd.Parameters.AddWithValue("@mts_terreno", datosEstacionamientoBodega.MtsTerreno);
-                    cmd.Parameters.AddWithValue("@direccion_comunal", datosEstacionamientoBodega.DireccionComunal);
-                    cmd.Parameters.AddWithValue("@rol_sii", datosEstacionamientoBodega.RolSii);
 
                     EstacionamientoBodega_ENT oEstacionamientoBodega = new EstacionamientoBodega_ENT();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -33,9 +30,6 @@ namespace PH_DAO
                     {
                         oEstacionamientoBodega.IdEstacionamientoBodega = Convert.ToInt32(reader["id_estacionamiento_bodega"]);
                         oEstacionamientoBodega.NumeroEstBod = reader["numero_est_bod"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["numero_est_bod"]);
-                        oEstacionamientoBodega.MtsTerreno = reader["mts_terreno"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["mts_terreno"]);
-                        oEstacionamientoBodega.DireccionComunal = reader["direccion_comunal"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["direccion_comunal"]);
-                        oEstacionamientoBodega.RolSii = reader["rol_sii"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["rol_sii"]);
                     }
                     return oEstacionamientoBodega;
                 }
@@ -86,9 +80,6 @@ namespace PH_DAO
                     cmd.CommandText = "SP_UPDATE_ESTACIONAMIENTOBODEGA_IDESTACIONAMIENTOBODEGA";
                     cmd.Parameters.AddWithValue("@id_estacionamiento_bodega", datosEstacionamientoBodega.IdEstacionamientoBodega);
                     cmd.Parameters.AddWithValue("@numero_est_bod", datosEstacionamientoBodega.NumeroEstBod);
-                    cmd.Parameters.AddWithValue("@mts_terreno", datosEstacionamientoBodega.MtsTerreno);
-                    cmd.Parameters.AddWithValue("@direccion_comunal", datosEstacionamientoBodega.DireccionComunal);
-                    cmd.Parameters.AddWithValue("@rol_sii", datosEstacionamientoBodega.RolSii);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -122,9 +113,6 @@ namespace PH_DAO
                     {
                         oEstacionamientoBodega.IdEstacionamientoBodega = Convert.ToInt32(reader["id_estacionamiento_bodega"]);
                         oEstacionamientoBodega.NumeroEstBod = reader["numero_est_bod"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["numero_est_bod"]);
-                        oEstacionamientoBodega.MtsTerreno = reader["mts_terreno"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["mts_terreno"]);
-                        oEstacionamientoBodega.DireccionComunal = reader["direccion_comunal"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["direccion_comunal"]);
-                        oEstacionamientoBodega.RolSii = reader["rol_sii"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["rol_sii"]);
                         return oEstacionamientoBodega;
                     }
                     else

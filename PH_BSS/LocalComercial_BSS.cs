@@ -12,7 +12,7 @@ namespace PH_BSS
         public LocalComercial_BSS() { 
         }
 
-        public LocalComercial_ENT insertDepartamento(LocalComercial_ENT datosLocalComercial)
+        public LocalComercial_ENT insertLocalComercial(LocalComercial_ENT datosLocalComercial)
         {
             LocalComercial_ENT oLocalComercial = new LocalComercial_DAO().insert(datosLocalComercial);
             return oLocalComercial;
