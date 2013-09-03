@@ -29,5 +29,10 @@ namespace PH_BSS
             return oCasa;
         }
 
+        public int updateCasa(Casa_ENT datosCasa) 
+        {
+            return new Casa_DAO().update(datosCasa);
+        }
+
     }
 }

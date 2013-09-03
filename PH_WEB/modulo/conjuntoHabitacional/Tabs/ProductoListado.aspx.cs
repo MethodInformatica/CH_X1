@@ -76,9 +76,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
             row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.ValoUF});
             row.Cells.Add(new HtmlTableCell()
             {
-                InnerHtml = "<button class='btn btn-mini btn-info' type='button'>Visualizar</button>&nbsp &nbsp" +
-                    "<button class='btn btn-mini btn-warning' type='button'>Editar</button>&nbsp &nbsp" +
-                    "<button class='btn btn-mini btn-danger' type='button' onclick=\"JaVASCRIPT:confirmarEliminarDoc('" + producto.CodigoProducto+ "');\">Eliminar</button>"
+                InnerHtml = "<button class='btn btn-mini btn-info' type='button'onclick=\"JaVASCRIPT:centralTabs('" + producto.IdProducto + "','" + producto.IdReferencia + "','" + producto.IdTipoProducto + "','" + 1 + "');\">Visualizar</button>&nbsp &nbsp" +
+                    "<button class='btn btn-mini btn-warning' type='button' onclick=\"JaVASCRIPT:centralTabs('" + producto.IdProducto + "','" + producto.IdReferencia + "','" + producto.IdTipoProducto + "','" + 2 + "');\">Editar</button>&nbsp &nbsp" +
+                    "<button class='btn btn-mini btn-danger' type='button' onclick=\"JaVASCRIPT:centralTabs('" + producto.IdProducto + "','" + producto.IdReferencia + "','" + producto.IdTipoProducto + "','" + 3 + "');\">Eliminar</button>"
             });
             i++;
             tablaProductos.Rows.Add(row);

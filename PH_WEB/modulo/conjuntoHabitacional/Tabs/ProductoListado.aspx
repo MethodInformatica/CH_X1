@@ -7,6 +7,11 @@
             return false;
         }
     }
+    function centralTabs(x,y,z,i) {
+        window.location.href = "centralTabs.aspx?x=" + x + "&y=" + y + "&z=" + z + "&i=" + i + " ";
+    }
+    
+    
 </script>
    <legend>Información Conjunto Habitacional</legend>
 <table border="1" cellpadding="0" cellspacing="0" width="100%">

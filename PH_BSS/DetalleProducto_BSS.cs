@@ -30,5 +30,10 @@ namespace PH_BSS
             return oDetalleProducto;
         }
 
+        public int updateDetalleProducto(DetalleProducto_ENT datosDetalleProducto) 
+        {
+            return new DetalleProducto_DAO().update(datosDetalleProducto);
+        }
+
     }
 }

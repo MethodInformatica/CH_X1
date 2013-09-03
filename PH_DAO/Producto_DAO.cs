@@ -167,6 +167,7 @@ namespace PH_DAO
                         oProducto.CodigoProducto = reader["codigo_producto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo_producto"]);
                         oProducto.TipoProducto = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
                         oProducto.ValoUF = reader["valor_uf"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["valor_uf"]);
+                        oProducto.IdTipoProducto = reader["id_tipo_producto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_tipo_producto"]);
 
                         listProducto.Add(oProducto);
                     }
