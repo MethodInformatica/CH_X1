@@ -29,5 +29,10 @@ namespace PH_BSS
             return oDepartamento;
         }
 
+        public int updateDepartamento(Departamento_ENT datosDepartamento)
+        {
+            return new Departamento_DAO().update(datosDepartamento);
+        }
+
     }
 }

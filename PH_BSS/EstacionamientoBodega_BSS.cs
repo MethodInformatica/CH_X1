@@ -28,5 +28,10 @@ namespace PH_BSS
             EstacionamientoBodega_ENT oEstacionamientoBodega = new EstacionamientoBodega_DAO().getForIdEstacionamientoBodega(datosEstacionamientoBodega);
             return oEstacionamientoBodega;
         }
+
+        public int updateEstacionamientoBodega(EstacionamientoBodega_ENT datosEstacionamientoBodega) 
+        {
+            return new EstacionamientoBodega_DAO().update(datosEstacionamientoBodega);
+        }
     }
 }

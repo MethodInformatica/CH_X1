@@ -28,5 +28,10 @@ namespace PH_BSS
             LocalComercial_ENT oLocalComercial = new LocalComercial_DAO().getForIdLocalComercial(datosLocalComercial);
             return oLocalComercial;
         }
+
+        public int updateLocalComercial(LocalComercial_ENT datosLocalComercial) 
+        {
+            return new LocalComercial_DAO().update(datosLocalComercial);
+        }
     }
 }

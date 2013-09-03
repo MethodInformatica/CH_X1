@@ -26,7 +26,7 @@ namespace PH_DAO
                     cmd.Parameters.AddWithValue("@id_producto", detalleProducto.IdProducto);
 
                     cmd.Parameters.AddWithValue("@caracteristicas", detalleProducto.Caracteristicas);
-                    cmd.Parameters.AddWithValue("@deslines", detalleProducto.Deslines == null ? "" : detalleProducto.Direccion);
+                    cmd.Parameters.AddWithValue("@deslines", detalleProducto.Deslines == null ? "" : detalleProducto.Deslines);
                     cmd.Parameters.AddWithValue("@orientacion", detalleProducto.Orientacion);
                     cmd.Parameters.AddWithValue("@direccion", detalleProducto.Direccion == null ? "" : detalleProducto.Direccion);
                     cmd.Parameters.AddWithValue("@mts_construidos", detalleProducto.MtsConstruidos);
@@ -83,7 +83,8 @@ namespace PH_DAO
                     SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "SP_DELETE_DETALLEPRODUCTO";
-                    cmd.Parameters.AddWithValue("@id_detalle", detalleProducto.IdDetalle);
+                    //cmd.Parameters.AddWithValue("@id_detalle", detalleProducto.IdDetalle);
+                    cmd.Parameters.AddWithValue("@id_producto", detalleProducto.IdProducto);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -115,9 +116,9 @@ namespace PH_DAO
                     cmd.Parameters.AddWithValue("@id_producto", detalleProducto.IdProducto);
 
                     cmd.Parameters.AddWithValue("@caracteristicas", detalleProducto.Caracteristicas);
-                    cmd.Parameters.AddWithValue("@deslines", detalleProducto.Deslines);
+                    cmd.Parameters.AddWithValue("@deslines", detalleProducto.Deslines == null ? "" : detalleProducto.Deslines);
                     cmd.Parameters.AddWithValue("@orientacion", detalleProducto.Orientacion);
-                    cmd.Parameters.AddWithValue("@direccion", detalleProducto.Direccion);
+                    cmd.Parameters.AddWithValue("@direccion", detalleProducto.Direccion == null ? "" : detalleProducto.Direccion);
                     cmd.Parameters.AddWithValue("@mts_construidos", detalleProducto.MtsConstruidos);
                     cmd.Parameters.AddWithValue("@mts_terreno", detalleProducto.MtsTerreno);
                     cmd.Parameters.AddWithValue("@direccion_comunal", detalleProducto.DireccionComunal);
