@@ -180,5 +180,46 @@ namespace PH_DAO
                 throw new Exception("Error al ejecutar SP_LIST_ALL_PRODUCTO", ex);
             }
         }
+
+        public List<Producto_ENT> listProductoParametro(string codigoProducto, int tipoProducto, string monto)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_LIST_PRODUCTO_PARAMETRO";
+
+                    cmd.Parameters.AddWithValue("@codigo_producto", codigoProducto == "" ? System.Data.SqlTypes.SqlString.Null : codigoProducto);
+                    cmd.Parameters.AddWithValue("@tipo_producto", tipoProducto == 0 ? System.Data.SqlTypes.SqlInt32.Null : tipoProducto);
+                    cmd.Parameters.AddWithValue("@monto", monto == "" ? System.Data.SqlTypes.SqlString.Null : monto);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Producto_ENT> listProducto = new List<Producto_ENT>();
+                    while (reader.Read())
+                    {
+                        Producto_ENT oProducto = new Producto_ENT();
+
+                        oProducto.IdProducto = Convert.ToInt32(reader["id_producto"]);
+                        oProducto.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
+                        oProducto.IdReferencia = reader["id_referencia"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_referencia"]);
+                        oProducto.CodigoProducto = reader["codigo_producto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo_producto"]);
+                        oProducto.TipoProducto = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
+                        oProducto.ValoUF = reader["valor_uf"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["valor_uf"]);
+                        oProducto.IdTipoProducto = reader["id_tipo_producto"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_tipo_producto"]);
+
+                        listProducto.Add(oProducto);
+                    }
+                    return listProducto;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_LIST_ALL_PRODUCTO", ex);
+            }
+        }
     }
 }

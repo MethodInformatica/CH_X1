@@ -20,7 +20,15 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
     {
         //ConjuntoHabitacional_ENT oConjunto = (ConjuntoHabitacional_ENT)Session["sessionConjuntoHabitacional"];
         //this.cargarDatosConjunto(oConjunto); 
-        this.cargaListado();
+        if (!Page.IsPostBack)
+        {
+            List<Producto_ENT> productos = new Producto_BSS().listAllProductos();
+            this.cargaListado(productos);
+        }
+        else 
+        {
+            // Código a ejecutar solo si vuelve a la pagina.
+        }
     }
 
     protected void cargarDatosConjunto(ConjuntoHabitacional_ENT oConjunto)
@@ -63,9 +71,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
                 JavaScript.alert("Funcionalidad en construcción!!!"));
     }
 
-    public void cargaListado() {
-
-        List<Producto_ENT> productos = new Producto_BSS().listAllProductos();
+    public void cargaListado(List<Producto_ENT> productos)
+    {
         int i = 1;
         foreach (Producto_ENT producto in productos)
         {
@@ -83,5 +90,23 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
             i++;
             tablaProductos.Rows.Add(row);
         }
+    }
+
+    protected void btn_buscar_producto_Click(object sender, EventArgs e)
+    {
+        string codigoProducto = text_codigoProducto_Busqueda.Text;
+        int tipoProducto = Convert.ToInt32(ddlTipoProducto_Busqueda.SelectedValue);
+        string monto = text_monto_busqueda.Text;
+
+        if (codigoProducto != "" && tipoProducto != 0 && monto != "")
+        {
+            List<Producto_ENT> productos = new Producto_BSS().listAllProductos();
+            this.cargaListado(productos);
+        }
+        else{
+            List<Producto_ENT> productos = new Producto_BSS().listProductosParametro(codigoProducto, tipoProducto, monto);
+            this.cargaListado(productos);
+        }
+        
     }
 }

@@ -75,7 +75,8 @@
                 <td align="left" valign="middle">Monto:<br/>
                     <asp:TextBox ID="text_monto_busqueda" runat="server"></asp:TextBox>
                 </td>
-                <td valign="middle"><button type="submit" class="btn btn-primary">Buscar Producto</button></td>
+                <td valign="middle"><asp:Button class="btn btn-primary" Text="Buscar Producto" 
+                        ID="btn_buscar_producto" runat="server" onclick="btn_buscar_producto_Click"  /></td>
             </tr>
         </table>
         

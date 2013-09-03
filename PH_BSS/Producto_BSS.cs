@@ -23,6 +23,12 @@ namespace PH_BSS
             return listaProductos;
         }
 
+        public List<Producto_ENT> listProductosParametro(string codigoProducto, int tipoProducto, string monto)
+        {
+            List<Producto_ENT> listaProductos = new Producto_DAO().listProductoParametro(codigoProducto, tipoProducto, monto);
+            return listaProductos;
+        }
+
         public Producto_ENT getProductoID(Producto_ENT datosProducto){
             Producto_ENT oProducto = new Producto_DAO().getForIdProducto(datosProducto);
             return oProducto;
