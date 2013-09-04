@@ -137,7 +137,7 @@ namespace PH_DAO
             }
         }
 
-        public List<Comuna_ENT> listComunaForIdCiudad(Comuna_ENT datosComuna)
+        public List<Comuna_ENT> listComunaForIdCiudad(string idCiudad)
         {
             try
             {
@@ -148,18 +148,18 @@ namespace PH_DAO
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "SP_LIST_ALL_COMUNA_IDCIUDAD";
 
-                    cmd.Parameters.AddWithValue("@id_ciudad", datosComuna.IdCiudad);
+                    cmd.Parameters.AddWithValue("@id_ciudad", idCiudad);
 
                     List<Comuna_ENT> listComuna = new List<Comuna_ENT>();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Comuna_ENT oComuna = new Comuna_ENT();
 
                         oComuna.IdComuna = Convert.ToInt32(reader["id_comuna"]);
                         oComuna.IdCiudad = Convert.ToInt32(reader["id_ciudad"]);
                         oComuna.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
-                        oComuna.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["sitio"]);
+                        oComuna.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);
 
                         listComuna.Add(oComuna);
                     }

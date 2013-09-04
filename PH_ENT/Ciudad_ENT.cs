@@ -11,6 +11,13 @@ namespace PH_ENT
         private int idRegion;
         private string nombre;
         private bool estado;
+        private Region_ENT region = new Region_ENT();
+
+        public Region_ENT Region
+        {
+            get { return region; }
+            set { region = value; }
+        }
 
         public int IdCiudad
         {

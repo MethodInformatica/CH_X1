@@ -114,7 +114,7 @@ namespace PH_DAO
                     SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "SP_GET_CIUDAD_IDCIUDAD";
-                    cmd.Parameters.AddWithValue("@id_region", datosCiudad.IdRegion);
+                    cmd.Parameters.AddWithValue("@id_ciudad", datosCiudad.IdCiudad);
                     SqlDataReader reader = cmd.ExecuteReader();
                     Ciudad_ENT oCiudad = new Ciudad_ENT();
                     if (reader.Read())
@@ -122,7 +122,7 @@ namespace PH_DAO
                         oCiudad.IdCiudad = Convert.ToInt32(reader["id_ciudad"]);
                         oCiudad.IdRegion = Convert.ToInt32(reader["id_region"]);
                         oCiudad.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
-                        oCiudad.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["sitio"]);
+                        oCiudad.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);
                         return oCiudad;
                     }
                     else
@@ -137,7 +137,7 @@ namespace PH_DAO
             }
         }
 
-        public List<Ciudad_ENT> listCiudadForIdRegion(Ciudad_ENT datosCiudad)
+        public List<Ciudad_ENT> listCiudadForIdRegion(string idRegion)
         {
             try
             {
@@ -148,18 +148,18 @@ namespace PH_DAO
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "SP_LIST_ALL_CIUDAD_IDREGION";
 
-                    cmd.Parameters.AddWithValue("@id_region", datosCiudad.IdRegion);
+                    cmd.Parameters.AddWithValue("@id_region", idRegion);
 
                     List<Ciudad_ENT> listCiudad = new List<Ciudad_ENT>();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Ciudad_ENT oCiudad = new Ciudad_ENT();
 
                         oCiudad.IdCiudad = Convert.ToInt32(reader["id_ciudad"]);
                         oCiudad.IdRegion = Convert.ToInt32(reader["id_region"]);
                         oCiudad.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
-                        oCiudad.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["sitio"]);
+                        oCiudad.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);
 
                         listCiudad.Add(oCiudad);
                     }

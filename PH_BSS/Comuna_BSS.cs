@@ -26,5 +26,10 @@ namespace PH_BSS
             Comuna_ENT oComuna = new Comuna_DAO().getForIdComuna(datosComuna);
             return oComuna;
         }
+
+        public List<Comuna_ENT> getAllByIdCiudad(string idCiudad)
+        {
+            return new Comuna_DAO().listComunaForIdCiudad(idCiudad);
+        }
     }
 }

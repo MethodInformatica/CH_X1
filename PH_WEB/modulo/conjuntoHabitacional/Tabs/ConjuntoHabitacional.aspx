@@ -1,6 +1,13 @@
-﻿<%@ Page UICulture="es" Culture="es-cl" Language="C#"  MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="ConjuntoHabitacional.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional" %>
+﻿<%@ Page UICulture="es" Culture="es-cl" Language="C#"  MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="ConjuntoHabitacional.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional" MaintainScrollPositionOnPostback="true"%>
   <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server">
+<script language="javascript">
+    $(document).ready(function() {
+        var altura = document.getElementById("contenidoFull").offsetHeight;
+        parent.document.getElementById("frameConjunto").height = altura;
+    });
+</script>
+<div id="contenidoFull" style="height:100%;width:100%;">
 <form id="formPrincipal" runat="server">
 <ajaxToolkit:ToolkitScriptManager runat="Server" EnableScriptGlobalization="true"
         EnableScriptLocalization="true" ID="ScriptManager1" ScriptMode="Debug" CombineScripts="false" />
@@ -34,21 +41,23 @@
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="left" valign="middle">Región:<br/>
-            <span class="destacado1">*</span><asp:DropDownList ID="ddlRegionConjunto" runat="server" class="input-medium">
-                <asp:ListItem Value="0">Región</asp:ListItem>
-                <asp:ListItem Value="1">15) REGIÓN METROPOLITANA DE SANTIAGO</asp:ListItem>
+            <span class="destacado1">*</span><asp:DropDownList ID="ddlRegionConjunto" 
+                runat="server" class="input-xlarge" 
+                onselectedindexchanged="ddlRegionConjunto_SelectedIndexChanged" AutoPostBack="true">
+                <asp:ListItem Value="0">Seleccione</asp:ListItem>
             </asp:DropDownList>
         </td>
         <td align="left" valign="middle">Ciudad:<br/>
-	        <span class="destacado1">*</span><asp:DropDownList ID="ddlCiudadConjunto" runat="server" class="input-medium">
-	            <asp:ListItem Value="0">Ciudad</asp:ListItem>
-	            <asp:ListItem Value="1">Santiago</asp:ListItem>
+	        <span class="destacado1">*</span><asp:DropDownList ID="ddlCiudadConjunto" 
+                runat="server" class="input-medium" 
+                onselectedindexchanged="ddlCiudadConjunto_SelectedIndexChanged" AutoPostBack="true">
+                <asp:ListItem Value="0">Seleccione</asp:ListItem>
 	        </asp:DropDownList>
         </td>
         <td align="left" valign="middle">Comuna:<br/>
-	        <span class="destacado1">*</span><asp:DropDownList ID="ddlComuna" runat="server" class="input-medium">
-	            <asp:ListItem Value="0">Comuna</asp:ListItem>
-	            <asp:ListItem Value="1">Santiago</asp:ListItem>
+	        <span class="destacado1">*</span><asp:DropDownList ID="ddlComuna" runat="server" 
+	        class="input-medium">
+	        <asp:ListItem Value="0">Seleccione</asp:ListItem>
 	        </asp:DropDownList>
         </td>
         <tr>
@@ -95,24 +104,25 @@
         </td>
     </tr>
     <tr>
-        <td align="left" valign="middle">Región:<br/>
-                <asp:DropDownList ID="ddlRegionVendedora" runat="server" class="input-medium">
-                <asp:ListItem Value="0">Región</asp:ListItem>
-                <asp:ListItem Value="1">1</asp:ListItem>
+         <td align="left" valign="middle">Región:<br/>
+                <asp:DropDownList ID="ddlRegionVendedora" runat="server" 
+                class="input-xlarge" 
+                onselectedindexchanged="ddlRegionVendedora_SelectedIndexChanged" AutoPostBack="true">
+                <asp:ListItem Value="0">Seleccione</asp:ListItem>
             </asp:DropDownList>
         </td>
         <td align="left" valign="middle">Ciudad:<br/>
-	            <asp:DropDownList ID="ddlCiudadVendedora" runat="server" class="input-medium">
-	            <asp:ListItem Value="0">Ciudad</asp:ListItem>
-	            <asp:ListItem Value="1">1</asp:ListItem>
+	            <asp:DropDownList ID="ddlCiudadVendedora" runat="server" 
+                class="input-medium" 
+                onselectedindexchanged="ddlCiudadVendedora_SelectedIndexChanged" AutoPostBack="true">
+	            <asp:ListItem Value="0">Seleccione</asp:ListItem>
 	        </asp:DropDownList>
         </td>
         <td align="left" valign="middle">Comuna:<br/>
 	            <asp:DropDownList ID="ddlComunaVendedora" runat="server" class="input-medium">
-	            <asp:ListItem Value="0">Comuna</asp:ListItem>
-	            <asp:ListItem Value="1">1</asp:ListItem>
+	            <asp:ListItem Value="0">Seleccione</asp:ListItem>
 	        </asp:DropDownList>
-        </td>       
+        </td>      
     </tr>
     <tr> <td align="left" valign="middle" colspan="3">Dirección:<br/>
 	            <span class="destacado1"></span><asp:TextBox ID="txtDireccionVendedora" MaxLength="50" runat="server"></asp:TextBox>
@@ -176,14 +186,13 @@
 
     <asp:Button ID="btnGrabar" runat="server" Text="Guardar" 
             class="btn btn-large btn-success" onclick="btnGrabar_Click"/>
-    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
+    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar Formulario" 
+                class="btn btn-large btn-warning" onclick="btnLimpiar_Click" />
     <br/>
     <div class="alert alert-block">
 <button type="button" class="close" data-dismiss="alert">&times;</button>
 <span class="destacado1" runat="server" id="Span1"> * </span>Información Obligatoria.
 </div>
-<br/>
-<br/>    
-<br/>
 </form>
+</div>
 </asp:Content>

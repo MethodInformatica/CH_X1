@@ -139,5 +139,69 @@ namespace PH_DAO
                 throw new Exception("Error al ejecutar SP_GET_SEGUIMIENTO_IDSEGUIMIENTO", ex);
             }
         }
+
+        public List<Seguimiento_ENT> getAllByPage(Seguimiento_ENT documento, int desde, int hasta)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_LIST_ALL_BYPAGE_SEGUIMIENTO";
+                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", documento.IdConjuntoHabitacional);
+                    cmd.Parameters.AddWithValue("@desde", desde);
+                    cmd.Parameters.AddWithValue("@hasta", hasta);
+                    List<Seguimiento_ENT> listado = new List<Seguimiento_ENT>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Seguimiento_ENT oSeguimiento = new Seguimiento_ENT();
+                        oSeguimiento.IdSeguimiento = Convert.ToInt32(reader["id_seguimiento"]);
+                        oSeguimiento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
+                        oSeguimiento.IdUsuario = reader["id_usuario"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_usuario"]);
+                        oSeguimiento.Fecha = reader["fecha"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha"]);
+                        oSeguimiento.Mensaje = reader["mensaje"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["mensaje"]);
+                        listado.Add(oSeguimiento);
+                    }
+                    return listado;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_LIST_ALL_BYPAGE_SEGUIMIENTO", ex);
+            }
+        }
+
+        public int getCount(Seguimiento_ENT documento)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_LIST_COUNT_SEGUIMIENTO";
+                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", documento.IdConjuntoHabitacional);
+                     SqlDataReader reader = cmd.ExecuteReader();
+                     if (reader.Read())
+                     {
+                         return  reader["total"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["total"]);                         
+                     }
+                     else
+                     {
+                         return 0;
+                     }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_LIST_COUNT_SEGUIMIENTO", ex);
+            }
+        }
     }
 }

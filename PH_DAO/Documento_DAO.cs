@@ -40,7 +40,7 @@ namespace PH_DAO
                     {
                         datosDocumento.IdDocumento = Convert.ToInt32(reader["id_documento"]);
                         datosDocumento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
-                        datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["folio"]);
+                        datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? "" : reader["folio"].ToString();
                         datosDocumento.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
                         datosDocumento.FechaDocumento = reader["fecha_documento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_documento"]);
                         datosDocumento.FechaVencimiento = reader["fecha_vencimiento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_vencimiento"]);
@@ -101,7 +101,6 @@ namespace PH_DAO
 
                     cmd.Parameters.AddWithValue("@id_documento", datosDocumento.IdDocumento);
                     cmd.Parameters.AddWithValue("@id_conjunto_habitacional", datosDocumento.IdConjuntoHabitacional);
-                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", datosDocumento.IdConjuntoHabitacional);
                     cmd.Parameters.AddWithValue("@folio", datosDocumento.Folio);
                     cmd.Parameters.AddWithValue("@nombre", datosDocumento.Nombre);
                     cmd.Parameters.AddWithValue("@fecha_documento", datosDocumento.FechaDocumento);
@@ -147,7 +146,7 @@ namespace PH_DAO
                         Documento_ENT datosDocumento = new Documento_ENT();
                         datosDocumento.IdDocumento = Convert.ToInt32(reader["id_documento"]);
                         datosDocumento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
-                        datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["folio"]);
+                        datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? "" : reader["folio"].ToString();
                         datosDocumento.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
                         datosDocumento.FechaDocumento = reader["fecha_documento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_documento"]);
                         datosDocumento.FechaVencimiento = reader["fecha_vencimiento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_vencimiento"]);
@@ -187,7 +186,7 @@ namespace PH_DAO
                     {
                         oDatosDocumento.IdDocumento = Convert.ToInt32(reader["id_documento"]);
                         oDatosDocumento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
-                        oDatosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["folio"]);
+                        oDatosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? "" : reader["folio"].ToString();
                         oDatosDocumento.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
                         oDatosDocumento.FechaDocumento = reader["fecha_documento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_documento"]);
                         oDatosDocumento.FechaVencimiento = reader["fecha_vencimiento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_vencimiento"]);
@@ -209,6 +208,88 @@ namespace PH_DAO
             catch (Exception ex)
             {
                 throw new Exception("Error al ejecutar SP_GET_DOCUMENTO_IDDOCUMENTO", ex);
+            }
+        }
+
+        public List<Documento_ENT> getAllByPage(Documento_ENT documento, int desde, int hasta, int all)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "sp_list_filtro_documento";
+                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", documento.IdConjuntoHabitacional);
+                    cmd.Parameters.AddWithValue("@folio", documento.Folio);
+                    cmd.Parameters.AddWithValue("@nombre", documento.Nombre);
+                    cmd.Parameters.AddWithValue("@fecha_documento", documento.FechaDocumento);
+                    cmd.Parameters.AddWithValue("@fecha_vencimiento", documento.FechaVencimiento);
+                    cmd.Parameters.AddWithValue("@desde", desde);
+                    cmd.Parameters.AddWithValue("@hasta", hasta);
+                    cmd.Parameters.AddWithValue("@all", all);
+                    List<Documento_ENT> listDocumento = new List<Documento_ENT>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Documento_ENT datosDocumento = new Documento_ENT();
+                        datosDocumento.IdDocumento = Convert.ToInt32(reader["id_documento"]);
+                        datosDocumento.IdConjuntoHabitacional = reader["id_conjunto_habitacional"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["id_conjunto_habitacional"]);
+                        datosDocumento.Folio = reader["folio"].Equals(DBNull.Value) ? "" : reader["folio"].ToString();
+                        datosDocumento.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
+                        datosDocumento.FechaDocumento = reader["fecha_documento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_documento"]);
+                        datosDocumento.FechaVencimiento = reader["fecha_vencimiento"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_vencimiento"]);
+                        datosDocumento.FechaIngreso = reader["fecha_ingreso"].Equals(DBNull.Value) ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["fecha_ingreso"]);
+                        datosDocumento.Descripcion = reader["descripcion"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["descripcion"]);
+                        datosDocumento.ArchivoNombre = reader["archivo_nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["archivo_nombre"]);
+                        datosDocumento.ArchivoExtencion = reader["archivo_extencion"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["archivo_extencion"]);
+                        datosDocumento.ArchivoTipo = reader["archivo_tipo"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["archivo_tipo"]);
+                        datosDocumento.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);
+
+                        listDocumento.Add(datosDocumento);
+                    }
+                    return listDocumento;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar sp_list_filtro_documento", ex);
+            }
+        }
+
+        public int getCount(Documento_ENT documento, int all)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_LIST_COUNT_FILTRO_DOCUMENTO";
+                    cmd.Parameters.AddWithValue("@id_conjunto_habitacional", documento.IdConjuntoHabitacional);
+                    cmd.Parameters.AddWithValue("@folio", documento.Folio);
+                    cmd.Parameters.AddWithValue("@nombre", documento.Nombre);
+                    cmd.Parameters.AddWithValue("@fecha_documento", documento.FechaDocumento);
+                    cmd.Parameters.AddWithValue("@fecha_vencimiento", documento.FechaVencimiento);
+                    cmd.Parameters.AddWithValue("@all", all);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return reader["total"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["total"]);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_LIST_COUNT_FILTRO_DOCUMENTO", ex);
             }
         }
     }

@@ -31,6 +31,21 @@ namespace PH_ENT
         private DateTime fechaRecepcionMunicipal;
         private DateTime fechaRecepcionProhogar;
 
+        private Comuna_ENT comunaConjunto = new Comuna_ENT();
+        private Comuna_ENT comunaVendedora = new Comuna_ENT();
+
+        public Comuna_ENT ComunaVendedora
+        {
+            get { return comunaVendedora; }
+            set { comunaVendedora = value; }
+        }
+
+        public Comuna_ENT ComunaConjunto
+        {
+            get { return comunaConjunto; }
+            set { comunaConjunto = value; }
+        }
+
         public int IdConjuntoHabitacional
         {
             get { return idConjuntoHabitacional; }
