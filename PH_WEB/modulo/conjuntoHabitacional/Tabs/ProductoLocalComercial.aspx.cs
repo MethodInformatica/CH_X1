@@ -33,6 +33,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
         oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
         tipoProducto = oTipoProducto.IdTipoProducto;
         nombreProducto = oTipoProducto.Nombre;
+        codigo = oTipoProducto.Codigo;
 
         this.cargarDatosConjunto(); 
     }
@@ -50,13 +51,14 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
     {
         if (this.validar())
         {
-            LocalComercial_ENT oCasa = new LocalComercial_BSS().generaCodigo(codigo);
+            LocalComercial_ENT oLocal = new LocalComercial_BSS().generaCodigo(codigo);
 
             LocalComercial_ENT local = this.datosLocal();
-            local.IdLocalComercial = oCasa.IdLocalComercial;
+            local.IdLocalComercial = oLocal.IdLocalComercial;
             new LocalComercial_BSS().updateLocalComercial(local);
 
-            Producto_ENT oProducto = this.datosProducto(local.IdLocalComercial);
+            Producto_ENT oProducto = this.datosProducto(oLocal.IdLocalComercial);
+            oProducto.CodigoProducto = oLocal.CodigoProducto;
             oProducto = new Producto_BSS().insert(oProducto);
 
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();

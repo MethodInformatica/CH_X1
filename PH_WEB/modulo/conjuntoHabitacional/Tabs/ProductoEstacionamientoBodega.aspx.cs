@@ -56,7 +56,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
             estaBode.IdEstacionamientoBodega = oEstaBode.IdEstacionamientoBodega;
             new EstacionamientoBodega_BSS().updateEstacionamientoBodega(estaBode);
 
-            Producto_ENT oProducto = this.datosProducto(estaBode.IdEstacionamientoBodega);
+            Producto_ENT oProducto = this.datosProducto(oEstaBode.IdEstacionamientoBodega);
+            oProducto.CodigoProducto = oEstaBode.CodigoProducto;
             oProducto = new Producto_BSS().insert(oProducto);
             
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
@@ -107,7 +108,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         if (!new Utilidad().validarLargo(text_nEstaBode.Text, 1, 4))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe ingresar los metros correspondientes al terreno (mínimo 5 cáracteres)"));
+                JavaScript.alert("Debe ingresar el numero de estacionamiento o bodega (mínimo 1 cáracteres)"));
             return false;
         }
         if (!new Utilidad().validarLargo(text_mTerreno.Text, 1, 30))
@@ -125,13 +126,13 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         if (!new Utilidad().validarLargo(text_rolSII.Text, 1, 30))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe ingresar el Rol de SII (mínimo 5 cáracteres)"));
+                JavaScript.alert("Debe ingresar el Rol de SII (mínimo 1 cáracteres)"));
             return false;
         }
         if (!new Utilidad().validarLargo(text_caracteristicas.Value, 5, 450))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe ingresar el Rol de SII (mínimo 5 cáracteres)"));
+                JavaScript.alert("Debe ingresar las caracteristicas (mínimo 5 cáracteres)"));
             return false;
         }
         if (ddlEstadoProducto.SelectedIndex.Equals("0"))
