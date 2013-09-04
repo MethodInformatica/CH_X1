@@ -85,12 +85,12 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         text_caracteristica.Text = detalleProductoENT.Caracteristicas;
         text_deslindes.Text = detalleProductoENT.Deslines;
         ddlOrientacion.SelectedValue = Convert.ToString(detalleProductoENT.Orientacion);
-        text_direccion.Text = detalleProductoENT.Direccion;
+        
         text_mConstruido.Text = Convert.ToString(detalleProductoENT.MtsConstruidos);
         text_mTerreno.Text = Convert.ToString(detalleProductoENT.MtsTerreno);
         text_direccionComunal.Text = detalleProductoENT.DireccionComunal;
         text_rolSII.Text = detalleProductoENT.RolSii;
-        ddlEstadoProducto.SelectedValue = Convert.ToString(detalleProductoENT.EstadoProducto);
+        
         text_valorUF.Text = Convert.ToString(detalleProductoENT.ValorUf);
         text_descuento.Text = Convert.ToString(detalleProductoENT.Descuento);
         text_valorFinalUF.Text = Convert.ToString(detalleProductoENT.ValorFinalUf);
@@ -108,8 +108,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
 
     protected void btn_grabar_Click(object sender, EventArgs e)
     {
-        if (this.validar())
-        {
+        //if (this.validar())
+        //{
             Casa_ENT casa = this.datosCasa();
             casa.IdCasa = Convert.ToInt32(y.Text);
             new Casa_BSS().updateCasa(casa);
@@ -121,7 +121,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
             new DetalleProducto_BSS().updateDetalleProducto(oDetalleProducto);
 
             Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoListado.aspx");
-        }
+        //}
     }
 
     public DetalleProducto_ENT datosDetalleProducto()
@@ -130,12 +130,12 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oDetalleProducto.Caracteristicas = text_caracteristica.Text;
         oDetalleProducto.Deslines = text_deslindes.Text;
         oDetalleProducto.Orientacion = Convert.ToInt32(ddlOrientacion.SelectedValue);
-        oDetalleProducto.Direccion = text_direccion.Text;
+        oDetalleProducto.Direccion = "";
         oDetalleProducto.MtsConstruidos = Convert.ToDecimal(text_mConstruido.Text);
         oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
         oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
         oDetalleProducto.RolSii = text_rolSII.Text;
-        oDetalleProducto.EstadoProducto = Convert.ToInt32(ddlEstadoProducto.SelectedValue);
+        oDetalleProducto.EstadoProducto = 0;
         oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
         oDetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
         oDetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
@@ -198,12 +198,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
                 JavaScript.alert("Debe seleccionar la orientacion de la casa"));
             return false;
         }
-        if (!new Utilidad().validarLargo(text_direccion.Text, 1, 200))
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe ingresar la dirección (mínimo 5 cáracteres)"));
-            return false;
-        }
         if (!new Utilidad().validarLargo(text_mConstruido.Text, 1, 30))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
@@ -226,12 +220,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe ingresar el Rol de SII (mínimo 5 cáracteres)"));
-            return false;
-        }
-        if (ddlEstadoProducto.SelectedIndex.Equals("0"))
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe seleccionar el estado del producto"));
             return false;
         }
         if (!new Utilidad().validarLargo(text_valorUF.Text, 1, 30))

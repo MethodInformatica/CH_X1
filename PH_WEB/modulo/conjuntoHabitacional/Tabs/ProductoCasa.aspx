@@ -1,16 +1,13 @@
-ï»¿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" CodeFile="ProductoCasa.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ProductoCasa" %>
-  <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" CodeFile="ProductoCasa.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ProductoCasa" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server">
 <form id="formPrincipal" runat="server">
-<ajaxToolkit:ToolkitScriptManager runat="Server" EnableScriptGlobalization="true"
-        EnableScriptLocalization="true" ID="ScriptManager1" ScriptMode="Debug" CombineScripts="false" />
+<ajaxToolkit:ToolkitScriptManager runat="Server" EnableScriptGlobalization="true" EnableScriptLocalization="true" ID="ScriptManager1" ScriptMode="Debug" CombineScripts="false" />
     <h1>INGRESO DE CASAS</h1>
-    <legend>InformaciÃ³n Conjunto Habitacional <span style="float:right; width: 20%; text-align:left";>
-                <a class="btn" href="#">Volver</a>
-            </span></legend>
+    <legend>Información Conjunto Habitacional <span style="float:right; width: 20%; text-align:left";><a class="btn" href="#">Volver</a></span></legend>
         <table border="1" cellpadding="0" cellspacing="0" width="90%">
             <tr>
-                <td align="left" valign="middle">CÃ³digo Conjunto Habitacional:<br/>
+                <td align="left" valign="middle">Código Conjunto Habitacional:<br/>
                     <asp:TextBox ID="text_codConjunto" runat="server" ReadOnly="true" Width="100"></asp:TextBox>
                 </td>
                 <td align="left" valign="middle">Nombre Conjunto Habitacional:<br/>
@@ -19,7 +16,7 @@
                 <td align="left" valign="middle">Etapa:<br/>
                     <asp:TextBox ID="text_etapa" runat="server" ReadOnly="true" Width="100"></asp:TextBox>
                 </td>
-                <td align="left" valign="middle">CÃ³digo Producto:<br/>
+                <td align="left" valign="middle">Código Producto:<br/>
                     <asp:TextBox ID="text_codProducto" runat="server" ReadOnly="true" Width="100"></asp:TextBox>
                 </td>
                 <td align="left" valign="middle">Tipo Producto:<br/>
@@ -54,7 +51,7 @@
     <legend>Datos generales</legend>
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
-            <td align="left" valign="middle" colspan="2">CaracterÃ­stica:<br/>
+            <td align="left" valign="middle" colspan="2">Característica:<br/>
                 <asp:TextBox ID="text_caracteristica" runat="server" width="250" height="50" MaxLength="250"></asp:TextBox>
             </td>
             <td align="left" valign="middle" colspan="2">Deslindes:<br/>
@@ -62,7 +59,7 @@
             </td>
             </tr>
             <tr>
-            <td align="left" valign="middle" colspan="2">OrientaciÃ³n:<br/>
+            <td align="left" valign="middle" colspan="2">Orientación:<br/>
 	            <asp:DropDownList ID="ddlOrientacion" runat="server" class="input-medium" Width="130">
 	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
 	                <asp:ListItem Value="1" Text="Norte"></asp:ListItem>
@@ -75,7 +72,7 @@
 	                <asp:ListItem Value="8" Text="Surponiente"></asp:ListItem>
 	            </asp:DropDownList>
             </td>
-            <td align="left" valign="middle">DirecciÃ³n Comunal:<br/>
+            <td align="left" valign="middle">Dirección Comunal:<br/>
                 <asp:TextBox ID="text_direccionComunal" runat="server" width="250" MaxLength="250"></asp:TextBox>
             </td>
         </tr>
@@ -135,7 +132,7 @@
             <td align="left" valign="middle">E-mail:<br/>
 	            <asp:TextBox ID="text_emailCliente" runat="server" Width="150" disabled></asp:TextBox>
             </td>
-            <td align="left" valign="middle">TelÃ©fono :<br/>
+            <td align="left" valign="middle">Teléfono :<br/>
 	            <asp:TextBox ID="text_telefonoCliente_Area" runat="server" Width="20" disabled></asp:TextBox>
 	             - 
 	             <asp:TextBox ID="text_telefonoCliente_Telefono" runat="server" Width="60" disabled></asp:TextBox>
@@ -146,13 +143,13 @@
     <legend>Compromiso Reserva / Carta Oferta</legend>
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
-            <td align="left" valign="middle">NÂ° Reserva:<br/>
+            <td align="left" valign="middle">N° Reserva:<br/>
                 <asp:TextBox ID="text_nReserva" runat="server" Width="100" disabled></asp:TextBox>
             </td>
             <td align="left" valign="middle">Fecha Reserva:<br/>
 	            <asp:TextBox ID="text_fechaReserva" runat="server" Width="100" disabled></asp:TextBox>
             </td>
-            <td align="left" valign="middle">NÂ° Carta Oferta:<br/>
+            <td align="left" valign="middle">N° Carta Oferta:<br/>
 	            <asp:TextBox ID="text_numeroCartaOferta" runat="server" Width="100" disabled></asp:TextBox>
             </td>
             <td align="left" valign="middle">Fecha Carta Oferta :<br/>
@@ -161,7 +158,7 @@
         </tr>
     </table>
 
-    <legend>InformaciÃ³n Interna</legend>
+    <legend>Información Interna</legend>
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
             <td align="left" valign="middle">Ejecutivo de Venta:<br/>
@@ -170,7 +167,7 @@
             <td align="left" valign="middle">Fecha Venta:<br/>
 	            <asp:TextBox ID="text_fechaVenta" runat="server" disabled></asp:TextBox>
             </td>
-            <td align="left" valign="middle">CÃ³digo Proyecto Proviene Cliente:<br/>
+            <td align="left" valign="middle">Código Proyecto Proviene Cliente:<br/>
 	            <asp:TextBox ID="text_codigoProyecto" runat="server" disabled></asp:TextBox>
             </td>
         </tr>
@@ -181,7 +178,7 @@
         <asp:Button ID="btn_grabar" runat="server" Text="Guardar" class="btn btn-large btn-success" onclick="btn_grabar_Click" />
         <asp:Button ID="btn_limpiar" runat="server" Text="Limpiar Formulario" class="btn btn-large btn-warning" />
         <br/>
-        <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">InformaciÃ³n Obligatoria.</span>
+        <span class="destacado1"> * </span><span style="font-size:12px; color: #333;">Información Obligatoria.</span>
     
 </form>
 </asp:Content>

@@ -49,8 +49,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
 
     protected void btn_grabar_Click(object sender, EventArgs e)
     {
-        if (this.validar())
-        {
+        //if (this.validar())
+        //{
             Casa_ENT oCasa = new Casa_BSS().generaCodigo(codigo);
 
             Casa_ENT casa = this.datosCasa();
@@ -67,7 +67,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
             oDetalleProducto = new DetalleProducto_BSS().insertDetalleProducto(oDetalleProducto);
 
             Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ProductoListado.aspx");
-        }
+        //}
     }
 
     public Producto_ENT datosProducto(int idCasa) 
@@ -88,15 +88,15 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oDetalleProducto.Deslines = text_deslindes.Text;
         oDetalleProducto.Orientacion = Convert.ToInt32(ddlOrientacion.SelectedValue);
         oDetalleProducto.Direccion = "";
-        oDetalleProducto.MtsConstruidos = Convert.ToDecimal(text_mConstruido.Text);
-        oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
+        oDetalleProducto.MtsConstruidos = text_mConstruido.Text == "" ? 0 : Convert.ToDecimal(text_mConstruido.Text);
+        oDetalleProducto.MtsTerreno = text_mTerreno.Text == "" ? 0 : Convert.ToDecimal(text_mTerreno.Text);
         oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
         oDetalleProducto.RolSii = text_rolSII.Text;
         oDetalleProducto.EstadoProducto = 0;
-        oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
-        oDetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
-        oDetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
-        oDetalleProducto.GastosOperacionalesUf = Convert.ToDecimal(text_gastoOperacional.Text);
+        oDetalleProducto.ValorUf = text_valorUF.Text == "" ? 0 : Convert.ToDecimal(text_valorUF.Text);
+        oDetalleProducto.Descuento = text_descuento.Text == "" ? 0 : Convert.ToDecimal(text_descuento.Text);
+        oDetalleProducto.ValorFinalUf = text_valorFinalUF.Text == "" ? 0 : Convert.ToDecimal(text_valorFinalUF.Text);
+        oDetalleProducto.GastosOperacionalesUf = text_gastoOperacional.Text == "" ? 0 : Convert.ToDecimal(text_gastoOperacional.Text);
         return oDetalleProducto;
     }
 
