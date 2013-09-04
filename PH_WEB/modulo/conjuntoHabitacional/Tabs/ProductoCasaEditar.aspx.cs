@@ -31,7 +31,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
             //codProducto = oConjunto.CodigoConjunto;
             //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
             //this.cargarDatosConjunto(oConjunto); 
-            codProducto = "13001";
             idConjuntoHabitacional = 21;
 
             int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -73,12 +72,14 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         y.Text = casaENT.IdCasa.ToString();
         z.Text = detalleProductoENT.IdDetalle.ToString();
 
+        //Codigo Producto
+        text_codProducto.Text = productoENT.CodigoProducto;
+
         //Casa
         text_manzana.Text = casaENT.Manzana;
         text_sitio.Text = casaENT.Sitio;
         ddlCasaEsquina.SelectedValue = Convert.ToString(casaENT.CasaEsquina);
         text_modelo.Text = casaENT.Modelo;
-
 
         //Detalle
         text_caracteristica.Text = detalleProductoENT.Caracteristicas;
@@ -102,7 +103,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 

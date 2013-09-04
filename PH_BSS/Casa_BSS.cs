@@ -34,5 +34,31 @@ namespace PH_BSS
             return new Casa_DAO().update(datosCasa);
         }
 
+        public Casa_ENT generaCodigo(string codigo) 
+        {
+            string codigoProducto;
+            Casa_ENT oCasa = new Casa_ENT();
+            oCasa = new Casa_DAO().insertCasa(codigo);
+
+            int cantidad = oCasa.Cantidad;
+
+            if (cantidad.ToString().Length == 1)
+            {
+                codigoProducto = codigo + "00" + cantidad;
+            }
+            else if (cantidad.ToString().Length == 2)
+            {
+                codigoProducto = codigo + "0" + cantidad;
+            }
+            else 
+            {
+                codigoProducto = codigo + cantidad;
+            }
+
+            oCasa.CodigoProducto = codigoProducto;
+            
+            return oCasa;
+        }
+
     }
 }

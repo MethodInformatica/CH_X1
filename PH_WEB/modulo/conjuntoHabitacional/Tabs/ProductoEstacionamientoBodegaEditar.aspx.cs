@@ -31,7 +31,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
             //codProducto = oConjunto.CodigoConjunto;
             //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
             //this.cargarDatosConjunto(oConjunto); 
-            codProducto = "13001";
             idConjuntoHabitacional = 21;
 
             int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -44,7 +43,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
             this.traeDatos(Convert.ToInt32(Request.QueryString["x"]));
         }
         else 
-        { 
+        {
+            // Código a ejecutar solo si vuelve a la pagina.
         }
     }
 
@@ -92,7 +92,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 

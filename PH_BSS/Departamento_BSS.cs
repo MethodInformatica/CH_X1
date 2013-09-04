@@ -34,5 +34,31 @@ namespace PH_BSS
             return new Departamento_DAO().update(datosDepartamento);
         }
 
+        public Departamento_ENT generaCodigo(string codigo)
+        {
+            string codigoProducto;
+            Departamento_ENT oDepto = new Departamento_ENT();
+            oDepto = new Departamento_DAO().insertDepartamento(codigo);
+
+            int cantidad = oDepto.Cantidad;
+
+            if (cantidad.ToString().Length == 1)
+            {
+                codigoProducto = codigo + "00" + cantidad;
+            }
+            else if (cantidad.ToString().Length == 2)
+            {
+                codigoProducto = codigo + "0" + cantidad;
+            }
+            else
+            {
+                codigoProducto = codigo + cantidad;
+            }
+
+            oDepto.CodigoProducto = codigoProducto;
+
+            return oDepto;
+        }
+
     }
 }

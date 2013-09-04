@@ -127,6 +127,35 @@ namespace PH_DAO
             }
         }
 
+        public EstacionamientoBodega_ENT insertEstacionamientoBodega(string codigo)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_INSERT_ESTACIONAMIENTOBODEGA_VACIO";
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    EstacionamientoBodega_ENT oEstaBode = new EstacionamientoBodega_ENT();
+                    while (reader.Read())
+                    {
+                        oEstaBode.IdEstacionamientoBodega = Convert.ToInt32(reader["id_estacionamiento_bodega"]);
+                        oEstaBode.Cantidad = Convert.ToInt32(reader["cantidad"]);
+                    }
+                    return oEstaBode;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_INSERT_ESTACIONAMIENTOBODEGA_VACIO", ex);
+            }
+        }
+
 
     }
 }

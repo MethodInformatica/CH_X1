@@ -125,6 +125,7 @@ namespace PH_DAO
                         oDepartamento.Piso = reader["piso"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["piso"]);
                         oDepartamento.NumeroDepto = reader["numero_depto"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["numero_depto"]);
                         oDepartamento.Modelo = reader["modelo"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["modelo"]);
+                        oDepartamento.CodigoProducto = reader["codigo"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo"]);
 
                         return oDepartamento;
                     }
@@ -137,6 +138,35 @@ namespace PH_DAO
             catch (Exception ex)
             {
                 throw new Exception("Error al ejecutar SP_GET_DEPARTAMENTO_IDDEPARTAMENTO", ex);
+            }
+        }
+
+        public Departamento_ENT insertDepartamento(string codigo)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_INSERT_DEPARTAMENTO_VACIO";
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Departamento_ENT oDepto = new Departamento_ENT();
+                    while (reader.Read())
+                    {
+                        oDepto.IdDepartamento = Convert.ToInt32(reader["id_departamento"]);
+                        oDepto.Cantidad = Convert.ToInt32(reader["cantidad"]);
+                    }
+                    return oDepto;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_INSERT_DEPARTAMENTO_VACIO", ex);
             }
         }
     }

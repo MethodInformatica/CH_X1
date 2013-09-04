@@ -15,11 +15,10 @@ using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web.UI.Page
 {
-    public string codProducto;
     public int idConjuntoHabitacional;
     public int tipoProducto;
     public string nombreProducto;
-
+    public string codigo;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,7 +26,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         //codProducto = oConjunto.CodigoConjunto;
         //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
         //this.cargarDatosConjunto(oConjunto); 
-        codProducto = "13001";
         idConjuntoHabitacional = 21;
 
         int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -35,6 +33,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
         tipoProducto = oTipoProducto.IdTipoProducto;
         nombreProducto = oTipoProducto.Nombre;
+        codigo = oTipoProducto.Codigo;
 
         this.cargarDatosConjunto(); 
     }
@@ -45,7 +44,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 
@@ -53,10 +51,14 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
     {
         if (this.validar())
         {
-            Departamento_ENT depto = this.datosDepartamento();
-            depto = new Departamento_BSS().insertDepartamento(depto);
+            Departamento_ENT oDepto = new Departamento_BSS().generaCodigo(codigo);
 
-            Producto_ENT oProducto = this.insertProducto(depto.IdDepartamento);
+            Departamento_ENT depto = this.datosDepartamento();
+            depto.IdDepartamento = oDepto.IdDepartamento;
+            new Departamento_BSS().updateDepartamento(depto);
+
+            Producto_ENT oProducto = this.datosProducto(oDepto.IdDepartamento);
+            oProducto.CodigoProducto = oDepto.CodigoProducto;
             oProducto = new Producto_BSS().insert(oProducto);
 
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
@@ -68,10 +70,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         }
     }
 
-    public Producto_ENT insertProducto(int idDepartamento)
+    public Producto_ENT datosProducto(int idDepartamento)
     {
         Producto_ENT oProducto = new Producto_ENT();
-        oProducto.CodigoProducto = codProducto;
         oProducto.IdTipoProducto = tipoProducto;
         oProducto.IdConjuntoHabitacional = idConjuntoHabitacional;
         oProducto.RutCliente = "";//Vacio

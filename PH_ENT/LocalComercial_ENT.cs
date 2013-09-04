@@ -9,6 +9,8 @@ namespace PH_ENT
     {
         private int idLocalComercial;
         private string sitio;
+        private int cantidad;
+        private string codigoProducto;
 
         public int IdLocalComercial
         {
@@ -20,6 +22,16 @@ namespace PH_ENT
         {
             get { return sitio; }
             set { sitio = value; }
+        }
+        public int Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
+        }
+        public string CodigoProducto
+        {
+            get { return codigoProducto; }
+            set { codigoProducto = value; }
         }
     }
 }

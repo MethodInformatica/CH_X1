@@ -33,10 +33,10 @@
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
             <td align="left" valign="middle">Manzana:<br/>
-                <asp:TextBox ID="text_manzana" runat="server" Width="120"></asp:TextBox>
+                <asp:TextBox ID="text_manzana" runat="server" Width="120" MaxLength="5"></asp:TextBox>
             </td>
             <td align="left" valign="middle">Sitio:<br/>
-	            <asp:TextBox ID="text_sitio" runat="server" Width="120"></asp:TextBox>
+	            <asp:TextBox ID="text_sitio" runat="server" Width="120" MaxLength="5"></asp:TextBox>
             </td>
             <td align="left" valign="middle">Casa Esquina:<br/>
 	            <asp:DropDownList ID="ddlCasaEsquina" runat="server" class="input-medium">
@@ -46,7 +46,7 @@
 	            </asp:DropDownList>
             </td>
             <td align="left" valign="middle">Modelo:<br/>
-	            <asp:TextBox ID="text_modelo" runat="server" Width="120"></asp:TextBox>
+	            <asp:TextBox ID="text_modelo" runat="server" Width="120" MaxLength="30"></asp:TextBox>
             </td>
         </tr>
     </table>
@@ -55,48 +55,48 @@
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
             <td align="left" valign="middle" colspan="2">Característica:<br/>
-                <asp:TextBox ID="text_caracteristica" runat="server" width="250" height="50"></asp:TextBox>
+                <asp:TextBox ID="text_caracteristica" runat="server" width="250" height="50" MaxLength="250"></asp:TextBox>
             </td>
             <td align="left" valign="middle" colspan="2">Deslindes:<br/>
-	            <asp:TextBox ID="text_deslindes" runat="server" width="250" height="50"></asp:TextBox>
+	            <asp:TextBox ID="text_deslindes" runat="server" width="250" height="50" MaxLength="250"></asp:TextBox>
             </td>
             </tr>
             <tr>
             <td align="left" valign="middle" colspan="2">Orientación:<br/>
-	            <asp:DropDownList ID="ddlOrientacion" runat="server" class="input-medium">
+	            <asp:DropDownList ID="ddlOrientacion" runat="server" class="input-medium" Width="130">
 	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
 	                <asp:ListItem Value="1" Text="Norte"></asp:ListItem>
 	                <asp:ListItem Value="2" Text="Sur"></asp:ListItem>
-	                <asp:ListItem Value="3" Text="Este"></asp:ListItem>
-	                <asp:ListItem Value="4" Text="Oeste"></asp:ListItem>
+	                <asp:ListItem Value="3" Text="Oriente"></asp:ListItem>
+	                <asp:ListItem Value="4" Text="Poniente"></asp:ListItem>
+	                <asp:ListItem Value="5" Text="Nororiente"></asp:ListItem>
+	                <asp:ListItem Value="6" Text="Norponiente"></asp:ListItem>
+	                <asp:ListItem Value="7" Text="Suroriente"></asp:ListItem>
+	                <asp:ListItem Value="8" Text="Surponiente"></asp:ListItem>
 	            </asp:DropDownList>
             </td>
-            <td align="left" valign="middle" colspan="2">Dirección:<br/>
-	            <asp:TextBox ID="text_direccion" runat="server" width="300"></asp:TextBox>
+            <td align="left" valign="middle">Dirección Comunal:<br/>
+                <asp:TextBox ID="text_direccionComunal" runat="server" width="250" MaxLength="250"></asp:TextBox>
             </td>
         </tr>
         <tr><td colspan="4">&nbsp</td></tr>
         <tr>
             <td align="left" valign="middle">Total Mts2 Construido (EJ: 70,43):<br/>
-                <asp:TextBox ID="text_mConstruido" runat="server" width="100"></asp:TextBox>
+                <asp:TextBox ID="text_mConstruido" runat="server" width="100" MaxLength="4"></asp:TextBox>
+                <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_mConstruido" ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" />
             </td>
             <td align="left" valign="middle">Total Mts2 Terreno (Ej: 100,23):<br/>
-                <asp:TextBox ID="text_mTerreno" runat="server" width="100"></asp:TextBox>
-            </td>
-            <td align="left" valign="middle">Dirección Comunal:<br/>
-                <asp:TextBox ID="text_direccionComunal" runat="server" width="100"></asp:TextBox>
+                <asp:TextBox ID="text_mTerreno" runat="server" width="100" MaxLength="4"></asp:TextBox>
+                <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_mTerreno" ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers" />
             </td>
             <td align="left" valign="middle">Rol SII:<br/>
-                <asp:TextBox ID="text_rolSII" runat="server" width="100"></asp:TextBox>
+                <asp:TextBox ID="text_rolSII" runat="server" width="100" MaxLength="5"></asp:TextBox>
+            </td>
+            <td align="left" valign="middle">
             </td>
         </tr>
         <tr>
-           <td align="left" valign="middle" colspan="4">Estado del Producto:<br/>
-                <asp:DropDownList ID="ddlEstadoProducto" runat="server" class="input-medium">
-	                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
-	                <asp:ListItem Value="1" Text="Reservado"></asp:ListItem>
-	                <asp:ListItem Value="2" Text="Asociado a Cliente"></asp:ListItem>
-	            </asp:DropDownList>
+           <td align="left" valign="middle" colspan="4"><br/>
            </td>
         </tr>
     </table>
@@ -105,16 +105,20 @@
     <table border="1" cellpadding="0" cellspacing="0" width="90%">
         <tr>
             <td align="left" valign="middle">Valor (UF):<br/>
-                <asp:TextBox ID="text_valorUF" runat="server" Width="100"></asp:TextBox>
+                <asp:TextBox ID="text_valorUF" runat="server" Width="100" MaxLength="5"></asp:TextBox>
+                <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_valorUF" ID="FilteredTextBoxExtender3" runat="server" FilterType="Numbers" />
             </td>
             <td align="left" valign="middle">Descuento (%):<br/>
-	            <asp:TextBox ID="text_descuento" runat="server" width="100"></asp:TextBox>
+	            <asp:TextBox ID="text_descuento" runat="server" width="100" MaxLength="3"></asp:TextBox>
+	            <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_descuento" ID="FilteredTextBoxExtender4" runat="server" FilterType="Numbers" />
             </td>
             <td align="left" valign="middle">Valor Final (UF):<br/>
-	            <asp:TextBox ID="text_valorFinalUF" runat="server" width="100"></asp:TextBox>
+	            <asp:TextBox ID="text_valorFinalUF" runat="server" width="100" MaxLength="3"></asp:TextBox>
+	            <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_valorFinalUF" ID="FilteredTextBoxExtender5" runat="server" FilterType="Numbers" />
             </td>
             <td align="left" valign="middle">Gasto Operacional (UF):<br/>
-	            <asp:TextBox ID="text_gastoOperacional" runat="server" width="100"></asp:TextBox>
+	            <asp:TextBox ID="text_gastoOperacional" runat="server" width="100" MaxLength="4"></asp:TextBox>
+	            <ajaxToolkit:FilteredTextBoxExtender TargetControlID="text_gastoOperacional" ID="FilteredTextBoxExtender6" runat="server" FilterType="Numbers" />
             </td>
         </tr>
     </table>

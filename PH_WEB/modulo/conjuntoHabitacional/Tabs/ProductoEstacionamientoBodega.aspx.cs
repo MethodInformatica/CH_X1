@@ -14,11 +14,11 @@ using PH_ENT;
 using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBodega : System.Web.UI.Page
-{
-    public string codProducto;
+{    
     public int idConjuntoHabitacional;
     public int tipoProducto;
     public string nombreProducto;
+    public string codigo;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,7 +26,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         //codProducto = oConjunto.CodigoConjunto;
         //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
         //this.cargarDatosConjunto(oConjunto); 
-        codProducto = "13001";
         idConjuntoHabitacional = 21;
 
         int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -34,9 +33,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
         tipoProducto = oTipoProducto.IdTipoProducto;
         nombreProducto = oTipoProducto.Nombre;
+        codigo = oTipoProducto.Codigo;
 
         this.cargarDatosConjunto(); 
-
     }
 
     protected void cargarDatosConjunto()
@@ -44,7 +43,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 
@@ -52,10 +50,13 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
     {
         if (this.validar())
         {
-            EstacionamientoBodega_ENT estaBode = this.datosEstaBode();
-            estaBode = new EstacionamientoBodega_BSS().insertEstacionamientoBodega(estaBode);
+            EstacionamientoBodega_ENT oEstaBode = new EstacionamientoBodega_BSS().generaCodigo(codigo);
 
-            Producto_ENT oProducto = this.insertProducto(estaBode.IdEstacionamientoBodega);
+            EstacionamientoBodega_ENT estaBode = this.datosEstaBode();
+            estaBode.IdEstacionamientoBodega = oEstaBode.IdEstacionamientoBodega;
+            new EstacionamientoBodega_BSS().updateEstacionamientoBodega(estaBode);
+
+            Producto_ENT oProducto = this.datosProducto(estaBode.IdEstacionamientoBodega);
             oProducto = new Producto_BSS().insert(oProducto);
             
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
@@ -68,10 +69,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
 
     }
 
-    public Producto_ENT insertProducto(int idEstaBod)
+    public Producto_ENT datosProducto(int idEstaBod)
     {
         Producto_ENT oProducto = new Producto_ENT();
-        oProducto.CodigoProducto = codProducto;
         oProducto.IdTipoProducto = tipoProducto;
         oProducto.IdConjuntoHabitacional = idConjuntoHabitacional;
         oProducto.RutCliente = "";//Vacio
@@ -86,7 +86,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoEstacionamientoBod
         oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
         oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
         oDetalleProducto.RolSii = text_rolSII.Text;
-
         oDetalleProducto.Caracteristicas = text_caracteristicas.Value;
         oDetalleProducto.EstadoProducto = Convert.ToInt32(ddlEstadoProducto.SelectedValue);
         oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);

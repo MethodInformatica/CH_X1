@@ -129,5 +129,34 @@ namespace PH_DAO
             }
         }
 
+        public LocalComercial_ENT insertLocalComercial(string codigo)
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_INSERT_LOCALCOMERCIAL_VACIO";
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    LocalComercial_ENT oLocal = new LocalComercial_ENT();
+                    while (reader.Read())
+                    {
+                        oLocal.IdLocalComercial = Convert.ToInt32(reader["id_local_comercial"]);
+                        oLocal.Cantidad = Convert.ToInt32(reader["cantidad"]);
+                    }
+                    return oLocal;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_INSERT_LOCALCOMERCIAL_VACIO", ex);
+            }
+        }
+
     }
 }

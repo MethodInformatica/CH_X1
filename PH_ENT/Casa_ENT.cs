@@ -12,7 +12,12 @@ namespace PH_ENT
         private string sitio;
         private int casaEsquina;
         private string modelo;
-        private DetalleProducto_ENT oDetalleProducto;
+        private string codigoProducto;
+        private int cantidad;
+
+        public Casa_ENT()
+        {
+        }        
 
         public int IdCasa
         {
@@ -44,13 +49,16 @@ namespace PH_ENT
             set { modelo = value; }
         }
 
-        public DetalleProducto_ENT ODetalleProducto
+        public string CodigoProducto
         {
-            get { return oDetalleProducto; }
-            set { oDetalleProducto = value; }
+            get { return codigoProducto; }
+            set { codigoProducto = value; }
         }
 
-        public Casa_ENT() { 
+        public int Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
         }
 
     }

@@ -23,7 +23,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
     public DetalleProducto_ENT detalleProductoENT;
     public Producto_ENT productoENT;
 
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -32,7 +31,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
             //codProducto = oConjunto.CodigoConjunto;
             //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
             //this.cargarDatosConjunto(oConjunto); 
-            codProducto = "13001";
+            idConjuntoHabitacional = 21;
 
             int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
             TipoProducto_ENT oTipoProducto = new TipoProducto_ENT();
@@ -44,7 +43,8 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
             this.traeDatos(Convert.ToInt32(Request.QueryString["x"]));
         }
         else 
-        { 
+        {
+            // Código a ejecutar solo si vuelve a la pagina.
         }
     }
 
@@ -71,6 +71,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         x.Text = productoENT.IdProducto.ToString();
         y.Text = departamentoENT.IdDepartamento.ToString();
         z.Text = detalleProductoENT.IdDetalle.ToString();
+
+        //Codigo Producto
+        text_codProducto.Text = productoENT.CodigoProducto;
 
         //Departamento
         text_block.Text = departamentoENT.Block;
@@ -99,7 +102,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoDepto : System.Web
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 

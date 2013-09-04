@@ -12,6 +12,12 @@ namespace PH_ENT
         private int piso;
         private string numeroDepto;
         private string modelo;
+        private int cantidad;
+        private string codigoProducto;
+
+        public Departamento_ENT()
+        {
+        }        
 
         public int IdDepartamento
         {
@@ -43,7 +49,16 @@ namespace PH_ENT
             set { modelo = value; }
         }
 
-        public Departamento_ENT() { 
+        public int Cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
+        }
+
+        public string CodigoProducto
+        {
+            get { return codigoProducto; }
+            set { codigoProducto = value; }
         }
 
     }

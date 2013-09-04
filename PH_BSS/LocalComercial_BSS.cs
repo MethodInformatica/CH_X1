@@ -33,5 +33,31 @@ namespace PH_BSS
         {
             return new LocalComercial_DAO().update(datosLocalComercial);
         }
+
+        public LocalComercial_ENT generaCodigo(string codigo)
+        {
+            string codigoProducto;
+            LocalComercial_ENT oLocal = new LocalComercial_ENT();
+            oLocal = new LocalComercial_DAO().insertLocalComercial(codigo);
+
+            int cantidad = oLocal.Cantidad;
+
+            if (cantidad.ToString().Length == 1)
+            {
+                codigoProducto = codigo + "00" + cantidad;
+            }
+            else if (cantidad.ToString().Length == 2)
+            {
+                codigoProducto = codigo + "0" + cantidad;
+            }
+            else
+            {
+                codigoProducto = codigo + cantidad;
+            }
+
+            oLocal.CodigoProducto = codigoProducto;
+
+            return oLocal;
+        }
     }
 }

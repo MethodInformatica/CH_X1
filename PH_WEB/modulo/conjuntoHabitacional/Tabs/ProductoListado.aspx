@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="ProductoListado.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_ProductoListado" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server"> 
 <form id="formPrincipal" runat="server">
+<ajaxToolkit:ToolkitScriptManager runat="Server" EnableScriptGlobalization="true" EnableScriptLocalization="true" ID="ScriptManager1" ScriptMode="Debug" CombineScripts="false" />
 <script>
     function confirmarEliminarDoc(ic) {
         if (confirm("Esta seguro de eliminar el Documento '" + ic + "'?")) {
@@ -63,7 +65,7 @@
         <table border="1" cellpadding="1" cellspacing="1" width="100%">
             <tr>
                 <td align="left" valign="middle">Código Producto:<br/>
-                    <asp:TextBox ID="text_codigoProducto_Busqueda" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="text_codigoProducto_Busqueda" runat="server" MaxLength="5"></asp:TextBox>
                 </td>
                 <td align="left" valign="middle">Tipo Producto:<br/>
 	                <asp:DropDownList ID="ddlTipoProducto_Busqueda" runat="server" class="input-medium">
@@ -78,10 +80,10 @@
                     </asp:DropDownList>
                 </td>
                 <td align="left" valign="middle">Monto:<br/>
-                    <asp:TextBox ID="text_monto_busqueda" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="text_monto_busqueda" runat="server" MaxLength="4"></asp:TextBox>
+                    <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="text_monto_busqueda" FilterType="Numbers" />
                 </td>
-                <td valign="middle"><asp:Button class="btn btn-primary" Text="Buscar Producto" 
-                        ID="btn_buscar_producto" runat="server" onclick="btn_buscar_producto_Click"  /></td>
+                <td valign="middle"><asp:Button class="btn btn-primary" Text="Buscar Producto" ID="btn_buscar_producto" runat="server" onclick="btn_buscar_producto_Click"  /></td>
             </tr>
         </table>
         

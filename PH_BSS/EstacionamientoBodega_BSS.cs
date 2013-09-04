@@ -33,5 +33,31 @@ namespace PH_BSS
         {
             return new EstacionamientoBodega_DAO().update(datosEstacionamientoBodega);
         }
+
+        public EstacionamientoBodega_ENT generaCodigo(string codigo)
+        {
+            string codigoProducto;
+            EstacionamientoBodega_ENT oEstaBode = new EstacionamientoBodega_ENT();
+            oEstaBode = new EstacionamientoBodega_DAO().insertEstacionamientoBodega(codigo);
+
+            int cantidad = oEstaBode.Cantidad;
+
+            if (cantidad.ToString().Length == 1)
+            {
+                codigoProducto = codigo + "00" + cantidad;
+            }
+            else if (cantidad.ToString().Length == 2)
+            {
+                codigoProducto = codigo + "0" + cantidad;
+            }
+            else
+            {
+                codigoProducto = codigo + cantidad;
+            }
+
+            oEstaBode.CodigoProducto = codigoProducto;
+
+            return oEstaBode;
+        }
     }
 }

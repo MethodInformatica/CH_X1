@@ -15,10 +15,10 @@ using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : System.Web.UI.Page
 {
-    public string codProducto;
     public int idConjuntoHabitacional;
     public int tipoProducto;
     public string nombreProducto;
+    public string codigo;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,7 +26,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
         //codProducto = oConjunto.CodigoConjunto;
         //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
         //this.cargarDatosConjunto(oConjunto); 
-        codProducto = "13001";
         idConjuntoHabitacional = 21;
 
         int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -44,7 +43,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 
@@ -52,10 +50,13 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
     {
         if (this.validar())
         {
-            LocalComercial_ENT local = this.datosLocal();
-            local = new LocalComercial_BSS().insertLocalComercial(local);
+            LocalComercial_ENT oCasa = new LocalComercial_BSS().generaCodigo(codigo);
 
-            Producto_ENT oProducto = this.insertProducto(local.IdLocalComercial);
+            LocalComercial_ENT local = this.datosLocal();
+            local.IdLocalComercial = oCasa.IdLocalComercial;
+            new LocalComercial_BSS().updateLocalComercial(local);
+
+            Producto_ENT oProducto = this.datosProducto(local.IdLocalComercial);
             oProducto = new Producto_BSS().insert(oProducto);
 
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
@@ -67,10 +68,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoLocalComercial : S
         }
     }
 
-    public Producto_ENT insertProducto(int idLocalComercial)
+    public Producto_ENT datosProducto(int idLocalComercial)
     {
         Producto_ENT oProducto = new Producto_ENT();
-        oProducto.CodigoProducto = codProducto;
         oProducto.IdTipoProducto = tipoProducto;
         oProducto.IdConjuntoHabitacional = idConjuntoHabitacional;
         oProducto.RutCliente = "";//Vacio

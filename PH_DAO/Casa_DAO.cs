@@ -26,9 +26,9 @@ namespace PH_DAO
                     cmd.Parameters.AddWithValue("@sitio", datosCasa.Sitio);
                     cmd.Parameters.AddWithValue("@casa_esquina", datosCasa.CasaEsquina);
                     cmd.Parameters.AddWithValue("@modelo", datosCasa.Modelo);
+                    SqlDataReader reader = cmd.ExecuteReader();
 
                     Casa_ENT oCasa = new Casa_ENT();
-                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         oCasa.IdCasa = Convert.ToInt32(reader["id_casa"]);
@@ -125,6 +125,7 @@ namespace PH_DAO
                         oCasa.Sitio = reader["sitio"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["sitio"]);
                         oCasa.CasaEsquina = reader["casa_esquina"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(reader["casa_esquina"]);
                         oCasa.Modelo = reader["modelo"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["modelo"]); ;
+                        oCasa.CodigoProducto = reader["codigo"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["codigo"]); ;
                         return oCasa;
                     }
                     else
@@ -136,6 +137,35 @@ namespace PH_DAO
             catch (Exception ex)
             {
                 throw new Exception("Error al ejecutar SP_GET_CASA_IDCASA", ex);
+            }
+        }
+
+        public Casa_ENT insertCasa(string codigo) 
+        {
+            try
+            {
+                using (SqlConnection sqlConn = new SqlConnection(this.ConexionPH))
+                {
+                    sqlConn.Open();
+                    SqlCommand cmd = new SqlCommand(this.ConexionPH, sqlConn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "SP_INSERT_CASA_VACIO";
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Casa_ENT oCasa = new Casa_ENT();
+                    while (reader.Read())
+                    {
+                        oCasa.IdCasa = Convert.ToInt32(reader["id_casa"]);
+                        oCasa.Cantidad = Convert.ToInt32(reader["cantidad"]);
+                    }
+                    return oCasa;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar SP_INSERT_CASA", ex);
             }
         }
 

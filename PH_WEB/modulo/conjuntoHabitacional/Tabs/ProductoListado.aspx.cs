@@ -72,6 +72,15 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
 
     public void cargaListado(List<Producto_ENT> productos)
     {
+        HtmlTableRow rowCabecera = new HtmlTableRow();
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "#" });
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "Código Producto" });
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "Tipo Producto" });
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "Monto (UF)" });
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "Rut Cliente" });
+        rowCabecera.Cells.Add(new HtmlTableCell() { InnerHtml = "Acciones" });
+        tablaProductos.Rows.Add(rowCabecera);
+
         int i = 1;
         foreach (Producto_ENT producto in productos)
         {
@@ -80,6 +89,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
             row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.CodigoProducto});
             row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.TipoProducto });
             row.Cells.Add(new HtmlTableCell() { InnerHtml = producto.ValoUF});
+            row.Cells.Add(new HtmlTableCell() { InnerHtml = "" });
             row.Cells.Add(new HtmlTableCell()
             {
                 InnerHtml = "<button class='btn btn-mini btn-info' type='button'onclick=\"JaVASCRIPT:centralTabs('" + producto.IdProducto + "','" + producto.IdReferencia + "','" + producto.IdTipoProducto + "','" + 1 + "');\">Visualizar</button>&nbsp &nbsp" +
@@ -108,4 +118,5 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoListado : System.W
         }
         
     }
+
 }

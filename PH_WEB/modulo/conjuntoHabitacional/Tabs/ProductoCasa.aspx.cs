@@ -15,10 +15,10 @@ using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.UI.Page
 {
-    public string codProducto;
     public int idConjuntoHabitacional;
     public int tipoProducto;
     public string nombreProducto;
+    public string codigo;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,7 +26,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         //codProducto = oConjunto.CodigoConjunto;
         //idConjuntoHabitacional = oConjunto.IdConjuntoHabitacional;
         //this.cargarDatosConjunto(oConjunto); 
-        codProducto = "13001";
         idConjuntoHabitacional = 21;
 
         int idTipoProducto = Convert.ToInt32(Request.QueryString["t"]);
@@ -34,6 +33,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oTipoProducto = new TipoProducto_BSS().getTipoProducto(idTipoProducto);
         tipoProducto = oTipoProducto.IdTipoProducto;
         nombreProducto = oTipoProducto.Nombre;
+        codigo = oTipoProducto.Codigo;
 
         this.cargarDatosConjunto(); 
     }
@@ -44,7 +44,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         //text_codConjunto.Text = oConjunto.CodigoConjunto;
         //text_nombreConjunto.Text = oConjunto.NombreConjunto;
         //text_etapa.Text = oConjunto.Etapa;
-        text_codProducto.Text = codProducto;
         text_tipoProducto.Text = nombreProducto;
     } 
 
@@ -52,10 +51,14 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
     {
         if (this.validar())
         {
-            Casa_ENT casa = this.datosCasa();
-            casa = new Casa_BSS().insertCasa(casa);
+            Casa_ENT oCasa = new Casa_BSS().generaCodigo(codigo);
 
-            Producto_ENT oProducto = this.insertProducto(casa.IdCasa);
+            Casa_ENT casa = this.datosCasa();
+            casa.IdCasa = oCasa.IdCasa;
+            new Casa_BSS().updateCasa(casa);
+
+            Producto_ENT oProducto = this.datosProducto(oCasa.IdCasa);
+            oProducto.CodigoProducto = oCasa.CodigoProducto;
             oProducto = new Producto_BSS().insert(oProducto);
             
             DetalleProducto_ENT oDetalleProducto = this.datosDetalleProducto();
@@ -67,9 +70,9 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         }
     }
 
-    public Producto_ENT insertProducto(int idCasa) {
+    public Producto_ENT datosProducto(int idCasa) 
+    {
         Producto_ENT oProducto = new Producto_ENT();
-        oProducto.CodigoProducto = codProducto;
         oProducto.IdTipoProducto = tipoProducto;
         oProducto.IdConjuntoHabitacional = idConjuntoHabitacional;
         oProducto.RutCliente = "";//Vacio
@@ -84,12 +87,12 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         oDetalleProducto.Caracteristicas = text_caracteristica.Text;
         oDetalleProducto.Deslines = text_deslindes.Text;
         oDetalleProducto.Orientacion = Convert.ToInt32(ddlOrientacion.SelectedValue);
-        oDetalleProducto.Direccion = text_direccion.Text;
+        oDetalleProducto.Direccion = "";
         oDetalleProducto.MtsConstruidos = Convert.ToDecimal(text_mConstruido.Text);
         oDetalleProducto.MtsTerreno = Convert.ToDecimal(text_mTerreno.Text);
         oDetalleProducto.DireccionComunal = text_direccionComunal.Text;
         oDetalleProducto.RolSii = text_rolSII.Text;
-        oDetalleProducto.EstadoProducto = Convert.ToInt32(ddlEstadoProducto.SelectedValue);
+        oDetalleProducto.EstadoProducto = 0;
         oDetalleProducto.ValorUf = Convert.ToDecimal(text_valorUF.Text);
         oDetalleProducto.Descuento = Convert.ToDecimal(text_descuento.Text);
         oDetalleProducto.ValorFinalUf = Convert.ToDecimal(text_valorFinalUF.Text);
@@ -152,12 +155,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
                 JavaScript.alert("Debe seleccionar la orientacion de la casa"));
             return false;
         }
-        if (!new Utilidad().validarLargo(text_direccion.Text, 5, 30))
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe ingresar la dirección (mínimo 5 cáracteres)"));
-            return false;
-        }
         if (!new Utilidad().validarLargo(text_mConstruido.Text, 1, 30))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
@@ -180,12 +177,6 @@ public partial class modulo_conjuntoHabitacional_Tabs_ProductoCasa : System.Web.
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe ingresar el Rol de SII (mínimo 5 cáracteres)"));
-            return false;
-        }
-        if (ddlEstadoProducto.SelectedIndex.Equals("0"))
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "",
-                JavaScript.alert("Debe seleccionar el estado del producto"));
             return false;
         }
         if (!new Utilidad().validarLargo(text_valorUF.Text, 1, 30))
