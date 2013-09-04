@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Casa_BSS.cs" />
+    <Compile Include="Ciudad_BSS.cs" />
     <Compile Include="Comuna_BSS.cs" />
     <Compile Include="ConjuntoHabitacional_BSS.cs" />
     <Compile Include="Departamento_BSS.cs" />
@@ -70,7 +71,10 @@
     <Compile Include="LocalComercial_BSS.cs" />
     <Compile Include="Producto_BSS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Region_BSS.cs" />
+    <Compile Include="Seguimiento_BSS.cs" />
     <Compile Include="TipoProducto_BSS.cs" />
+    <Compile Include="Usuario_BSS.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PH_DAO\PH_DAO.csproj">
