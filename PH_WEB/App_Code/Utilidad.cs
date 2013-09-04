@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
+using PH_ENT;
+using PH_BSS;
 
 /// <summary>
 /// Descripción breve de Utilidad
@@ -160,5 +162,109 @@ public class Utilidad
                 return true;
             else
                 return false;
+        }
+
+        public void cargarRegion(DropDownList DDLregion, string selected)
+        {
+            DDLregion.Items.Clear();
+            DDLregion.Items.Add(new ListItem()
+            {
+                Text = "Seleccione",
+                Value = "0"
+            });
+            foreach (Region_ENT region in new Region_BSS().getAll())
+            {
+                DDLregion.Items.Add(new ListItem()
+                {
+                    Text = region.IdRegion.ToString() + ") " + region.Nombre,
+                    Value = region.IdRegion.ToString()
+                });
+            }
+            DDLregion.SelectedValue = selected;
+        }
+
+        public void cargarCiudad(DropDownList DDLCiudad, string idRegion, string selected)
+        {
+            DDLCiudad.Items.Clear();
+            DDLCiudad.Items.Add(new ListItem()
+            {
+                Text = "Seleccione",
+                Value = "0"
+            });
+            foreach (Ciudad_ENT ciudad in new Ciudad_BSS().getAllByIdRegion(idRegion))
+            {
+                DDLCiudad.Items.Add(new ListItem()
+                {
+                    Text = ciudad.Nombre,
+                    Value = ciudad.IdCiudad.ToString()
+                });
+            }
+            DDLCiudad.SelectedValue = selected;
+        }
+
+        public void cargarComuna(DropDownList DDLComuna, string idCiudad, string selected)
+        {
+            DDLComuna.Items.Clear();
+            DDLComuna.Items.Add(new ListItem()
+            {
+                Text = "Seleccione",
+                Value = "0"
+            });
+            foreach (Comuna_ENT ciudad in new Comuna_BSS().getAllByIdCiudad(idCiudad))
+            {
+                DDLComuna.Items.Add(new ListItem()
+                {
+                    Text = ciudad.Nombre,
+                    Value = ciudad.IdComuna.ToString()
+                });
+            }
+            DDLComuna.SelectedValue = selected;
+        }
+
+        public string traerParametro(string nombre)
+        {
+            return System.Configuration.ConfigurationSettings.AppSettings.Get(nombre);
+        }
+
+        public int uploadArchivo(FileUpload fileArchivo, string path, string[] extension, string nombre)
+        {
+            Boolean fileOK = false;
+            String fileExtension = "";
+            if (fileArchivo.HasFile)
+            {
+                fileExtension =
+                    System.IO.Path.GetExtension(fileArchivo.FileName).ToLower();
+                for (int i = 0; i < extension.Length; i++)
+                {
+                    if (fileExtension == extension[i])
+                    {
+                        fileOK = true;
+                    }
+                }
+            }
+
+            if (fileOK)
+            {
+                try
+                {
+                    fileArchivo.PostedFile.SaveAs(path
+                        + nombre + fileExtension);
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public void eliminarArchivo(string path)
+        {
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
         }
 }

@@ -12,7 +12,9 @@ namespace PH_ENT
         private int idUsuario;
         private DateTime fecha;
         private string mensaje;
+        private UsuarioSistema_ENT usuario = new UsuarioSistema_ENT();
 
+        
         public int IdSeguimiento
         {
             get { return idSeguimiento; }
@@ -41,6 +43,11 @@ namespace PH_ENT
         {
             get { return mensaje; }
             set { mensaje = value; }
+        }
+        public UsuarioSistema_ENT Usuario
+        {
+            get { return usuario; }
+            set { usuario = value; }
         }
     }
 }

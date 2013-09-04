@@ -1,6 +1,13 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/modulo/conjuntoHabitacional/Tabs/MarcoTab.master" AutoEventWireup="true" CodeFile="Seguimiento.aspx.cs" Inherits="modulo_conjuntoHabitacional_Tabs_Seguimiento" %>
 <asp:Content ID="content" ContentPlaceHolderID="bodyTabContent" Runat="Server"> 
+<script language="javascript">
+$( document ).ready(function() {
+var altura = document.getElementById("contenidoFull").offsetHeight;
+parent.document.getElementById("frameSeguimiento").height = altura;
+});
+</script>
 <form id="formPrincipal" runat="server">
+<div id="contenidoFull" style="height:100%">
   <legend>Información Conjunto Habitacional</legend>
 <table border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -40,7 +47,7 @@
         
         <legend>Listado de comentarios</legend>
         <table class="table table-striped" runat="server" id="tablaSeguimiento">
-            <thead><th><button type="submit" class="btn">Actualizar</button></th></thead>
+            <tr><td><button type="submit" class="btn">Actualizar</button></td></tr>
             <tbody>                
             </tbody>
         </table>
@@ -55,5 +62,7 @@
             <li><a href="#">Siguiente</a></li>
         </ul>
         </div>
+        
+ </div>
 </form>
 </asp:Content>

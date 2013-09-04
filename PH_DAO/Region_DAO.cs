@@ -118,7 +118,7 @@ namespace PH_DAO
                     {
                         oRegion.IdRegion = Convert.ToInt32(reader["id_region"]);
                         oRegion.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
-                        oRegion.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["sitio"]);                        
+                        oRegion.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);                        
                         return oRegion;
                     }
                     else
@@ -152,7 +152,7 @@ namespace PH_DAO
 
                         oRegion.IdRegion = Convert.ToInt32(reader["id_region"]);
                         oRegion.Nombre = reader["nombre"].Equals(DBNull.Value) ? "" : Convert.ToString(reader["nombre"]);
-                        oRegion.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["sitio"]);                        
+                        oRegion.Estado = reader["estado"].Equals(DBNull.Value) ? false : Convert.ToBoolean(reader["estado"]);                        
 
                         listRegion.Add(oRegion);
                     }

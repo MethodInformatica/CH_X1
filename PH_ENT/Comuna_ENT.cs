@@ -11,6 +11,14 @@ namespace PH_ENT
         private int idCiudad;
         private string nombre;
         private bool estado;
+        private Ciudad_ENT ciudad = new Ciudad_ENT();
+
+
+        public Ciudad_ENT Ciudad
+        {
+            get { return ciudad; }
+            set { ciudad = value; }
+        }
 
         public int IdComuna
         {

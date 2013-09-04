@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using PH_ENT;
 using System.Collections.Generic;
+using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_Seguimiento : System.Web.UI.Page
 {
@@ -20,50 +21,58 @@ public partial class modulo_conjuntoHabitacional_Tabs_Seguimiento : System.Web.U
         if (!IsPostBack)
         {
             ConjuntoHabitacional_ENT conjunto = (ConjuntoHabitacional_ENT)Session["conjuntoHabitacionalSeleccionado"];
-            this.cargarFormulario(conjunto);
+            this.cargarSeguimientoPaginado(conjunto,1);
         }
         else
         {
+            
         }
     }
 
-    private void cargarFormulario(ConjuntoHabitacional_ENT conjunto)
+    private void cargarSeguimientoPaginado(ConjuntoHabitacional_ENT conjunto, int pagina)
     {
         txtCodigoConjunto.Text = conjunto.CodigoConjunto;
         txtNombreConjunto.Text = conjunto.NombreConjunto;
         txtEtapa.Text = conjunto.Etapa;
-        for (int i = 1; i <= 4;i++)
+        Seguimiento_BSS seguimiento = new Seguimiento_BSS();
+        seguimiento.Pagina = pagina;
+        seguimiento.IdConjuntoHabitacional = conjunto.IdConjuntoHabitacional;
+        seguimiento.CantidadRegistros = Convert.ToInt32(new Utilidad().traerParametro("cantRegistros"));
+        seguimiento.generarResultado();
+        this.cargarSeguimiento(seguimiento.Elementos);        
+    }
+
+    private void cargarSeguimiento(List<Seguimiento_ENT> seguimientos)
+    {
+        HtmlTableRow cabecera = new HtmlTableRow();
+        tablaSeguimiento.Rows.Clear();
+        cabecera.Cells.Clear();
+        cabecera.Cells.Add(new HtmlTableCell() { 
+            InnerHtml="<button type='button' class='btn'"+
+            " onclick=\"JAVASCRIPT:window.open('"+Page.ResolveClientUrl("~/modulo/conjuntoHabitacional/Tabs/Seguimiento.aspx")+"','_self');\">Actualizar</button>"
+        });
+        tablaSeguimiento.Rows.Add(cabecera);
+        foreach(Seguimiento_ENT seguimiento in seguimientos)
         {
             HtmlTableRow row = new HtmlTableRow();
-            row.Cells.Add(new HtmlTableCell() { InnerHtml = "<h4>maviles - 22/05/2013 14:"+(i*8).ToString()+"</h4>"+
-                    "<p class='text-warning'>Comentario '"+i.ToString()+"'</p>" });
+            row.Cells.Add(new HtmlTableCell()
+            {
+                InnerHtml = "<h4>"+seguimiento.Usuario.Usuario+" - "+seguimiento.Fecha.ToShortDateString()+" "+
+                seguimiento.Fecha.ToShortTimeString() + "</h4>" +
+                    "<p class='text-warning'>"+ seguimiento.Mensaje +"</p>"
+            });
             tablaSeguimiento.Rows.Add(row);
         }
     }
     protected void btnComentario_Click(object sender, EventArgs e)
     {
         ConjuntoHabitacional_ENT conjunto = (ConjuntoHabitacional_ENT)Session["conjuntoHabitacionalSeleccionado"];
-        txtCodigoConjunto.Text = conjunto.CodigoConjunto;
-        txtNombreConjunto.Text = conjunto.NombreConjunto;
-        txtEtapa.Text = conjunto.Etapa;
-        
-        HtmlTableRow row = new HtmlTableRow();
-        row.Cells.Add(new HtmlTableCell()
-        {
-            InnerHtml = "<h4>ibalmaceda - " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + "</h4>" +
-                "<p class='text-warning'>"+txtComentario.InnerText+"</p>"
-        });
-        tablaSeguimiento.Rows.Add(row);
-        for (int i = 1; i <= 4; i++)
-        {
-            HtmlTableRow row2 = new HtmlTableRow();
-            row2.Cells.Add(new HtmlTableCell()
-            {
-                InnerHtml = "<h4>maviles - 22/05/2013 14:" + (i * 8).ToString() + "</h4>" +
-                    "<p class='text-warning'>Comentario '" + i.ToString() + "'</p>"
-            });
-            tablaSeguimiento.Rows.Add(row2);
-        }
-        txtComentario.InnerText = "";
+        Seguimiento_ENT seguimiento = new Seguimiento_ENT();
+        seguimiento.IdConjuntoHabitacional = conjunto.IdConjuntoHabitacional;
+        seguimiento.Mensaje = txtComentario.InnerText;
+        seguimiento.IdUsuario = 1;
+        seguimiento.Fecha = DateTime.Now;
+        seguimiento = new Seguimiento_BSS().save(seguimiento);
+        this.cargarSeguimientoPaginado(conjunto, 1);
     }
 }

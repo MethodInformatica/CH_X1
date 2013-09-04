@@ -54,29 +54,29 @@ CodeFile="Editar.aspx.cs" Inherits="modulo_conjuntoHabitacional_Editar" %>
     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" 
     HeaderText="Conjunto Habitacional">
         <ContentTemplate>
-         <iframe name="" frameborder="0" height="1130" marginheight="0" marginwidth="0" width="100%" 
+         <iframe id="frameConjunto" name="frameConjunto" frameborder="0" height="100" marginheight="0" marginwidth="0" width="100%" 
          scrolling="no" src="Tabs/ConjuntoHabitacional.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" 
     HeaderText="Documentación Asociada">
     <ContentTemplate>
-         <iframe name="" frameborder="0" height="830" marginheight="0" marginwidth="0" width="100%" 
+         <iframe id="frameDocumentos" name="frameDocumentos" frameborder="0" height="100" marginheight="0" marginwidth="0" width="100%" 
          scrolling="no" src="Tabs/DocumentoListado.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     <ajaxToolkit:TabPanel ID="TabPanel3" runat="server" 
     HeaderText="Seguimiento">
     <ContentTemplate>
-         <iframe name="" frameborder="0" height="830" marginheight="0" marginwidth="0" width="100%" 
-         scrolling="auto" src="Tabs/Seguimiento.aspx"></iframe>
+         <iframe id="frameSeguimiento" name="frameSeguimiento" frameborder="0" height="100" marginheight="0" marginwidth="0" width="100%" 
+         scrolling="no" src="Tabs/Seguimiento.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     <ajaxToolkit:TabPanel ID="TabPanel4" runat="server" 
     HeaderText="Detalle de Viviendas o Dpto">
     <ContentTemplate>
-         <iframe name="" frameborder="0" height="1500" marginheight="0" marginwidth="0" width="100%" 
-         scrolling="auto" src="Tabs/ProductoListado.aspx"></iframe>
+         <iframe id="frameProductos" name="frameProductos" frameborder="0" height="100" marginheight="0" marginwidth="0" width="100%" 
+         scrolling="no" src="Tabs/ProductoListado.aspx"></iframe>
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>

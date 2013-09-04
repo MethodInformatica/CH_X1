@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using PH_ENT;
 using PH_BSS;
+using System.Collections.Generic;
 
 public partial class modulo_conjuntoHabitacional_Agregar : System.Web.UI.Page
 {
@@ -19,7 +20,8 @@ public partial class modulo_conjuntoHabitacional_Agregar : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            new Utilidad().cargarRegion(ddlRegionConjunto, "0");
+            new Utilidad().cargarRegion(ddlRegionVendedora, "0");
         }
         else
         {
@@ -31,7 +33,7 @@ public partial class modulo_conjuntoHabitacional_Agregar : System.Web.UI.Page
     {
 
         ConjuntoHabitacional_ENT oConjunto = new ConjuntoHabitacional_ENT();
-        oConjunto.CodigoConjunto = "";
+        oConjunto.CodigoConjunto = txtCodigoConjunto.Text;
         oConjunto.NombreConjunto = Convert.ToString(txtNombreConjunto.Text);
         oConjunto.Etapa = Convert.ToString(txtEtapa.Text);
         oConjunto.IdComunaConjunto = Convert.ToInt32(ddlComuna.SelectedValue);
@@ -56,25 +58,31 @@ public partial class modulo_conjuntoHabitacional_Agregar : System.Web.UI.Page
 
     private bool validar()
     {
+        if (!new Utilidad().validarLargo(txtCodigoConjunto.Text, 3, 10))
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "",
+                JavaScript.alert("Debe ingresar el código del conjunto habitacional (mínimo 3 cáracteres)"));
+            return false;
+        }
         if (!new Utilidad().validarLargo(txtNombreConjunto.Text, 5, 30))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe ingresar el nombre del conjunto habitacional (mínimo 5 cáracteres)"));
              return false;
         }
-        if (ddlRegionConjunto.SelectedIndex.Equals("0"))
+        if (ddlRegionConjunto.SelectedValue.Equals("0"))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe seleccionar una región para el Conjunto Habitacional"));
             return false;
         }
-        if (ddlCiudadConjunto.SelectedIndex.Equals("0"))
+        if (ddlCiudadConjunto.SelectedValue.Equals("0"))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe seleccionar una Ciudad para el Conjunto Habitacional"));
             return false;
         }
-        if (ddlComuna.SelectedIndex.Equals("0"))
+        if (ddlComuna.SelectedValue.Equals("0"))
         {
             ClientScript.RegisterStartupScript(this.GetType(), "",
                 JavaScript.alert("Debe seleccionar una Comuna para el Conjunto Habitacional"));
@@ -148,9 +156,37 @@ public partial class modulo_conjuntoHabitacional_Agregar : System.Web.UI.Page
         if (this.validar())
         {
             ConjuntoHabitacional_ENT conjunto = this.datosConjuntoHabitacional();
-            conjunto = new ConjuntoHabitacional_BSS().insertConjuntoHabitacional(conjunto);
-            Session["conjuntoHabitacionalSeleccionado"] = conjunto;
-            Response.Redirect("~/modulo/conjuntoHabitacional/Listado.aspx");
+            if (new ConjuntoHabitacional_BSS().getByCodigo(conjunto.CodigoConjunto)==null)
+            {
+                conjunto = new ConjuntoHabitacional_BSS().insertConjuntoHabitacional(conjunto);
+                Session["conjuntoHabitacionalSeleccionado"] = conjunto;
+                Response.Redirect("~/modulo/conjuntoHabitacional/Listado.aspx");
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "",
+                JavaScript.alert("El código del conjunto habitacional ya se encuentra registrado"));
+            }
         }
+    }
+    protected void ddlRegionConjunto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarCiudad(ddlCiudadConjunto, ddlRegionConjunto.SelectedValue,"0");
+    }
+    protected void ddlCiudadConjunto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarComuna(ddlComuna, ddlCiudadConjunto.SelectedValue, "0");
+    }
+    protected void ddlRegionVendedora_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarCiudad(ddlCiudadVendedora, ddlRegionVendedora.SelectedValue, "0");
+    }
+    protected void ddlCiudadVendedora_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarComuna(ddlComunaVendedora, ddlCiudadVendedora.SelectedValue, "0");
+    }
+    protected void btnLimpiar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/modulo/conjuntoHabitacional/Agregar.aspx");
     }
 }

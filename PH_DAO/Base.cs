@@ -14,5 +14,11 @@ namespace PH_DAO
             this.ConexionPH = System.Configuration.ConfigurationManager.ConnectionStrings["ConexionPH"].ToString();
         }
 
+        public string cargarQuery(string queryName)
+        {
+            string valor = System.Configuration.ConfigurationSettings.AppSettings.Get(queryName);
+            return valor;
+        }
+
     }
 }

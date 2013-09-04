@@ -9,7 +9,7 @@ namespace PH_ENT
     {
         private int idDocumento;
         private int idConjuntoHabitacional;
-        private int folio;
+        private string folio;
         private string nombre;
         private DateTime fechaDocumento;
         private DateTime fechaVencimiento;
@@ -31,8 +31,8 @@ namespace PH_ENT
             get { return idConjuntoHabitacional; }
             set { idConjuntoHabitacional = value; }
         }
-        
-        public int Folio
+
+        public string Folio
         {
             get { return folio; }
             set { folio = value; }

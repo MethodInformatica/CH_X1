@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using PH_ENT;
+using PH_BSS;
 
 public partial class modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional : System.Web.UI.Page
 {
@@ -19,12 +20,15 @@ public partial class modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional : Sys
         if (!IsPostBack)
         {
             ConjuntoHabitacional_ENT conjunto = (ConjuntoHabitacional_ENT)Session["conjuntoHabitacionalSeleccionado"];
+            conjunto = new ConjuntoHabitacional_BSS().getByCodigo(conjunto.CodigoConjunto);
             this.cargarFormulario(conjunto);
         }
         else
         {
             ConjuntoHabitacional_ENT conjunto = (ConjuntoHabitacional_ENT)Session["conjuntoHabitacionalSeleccionado"];
-            this.cargarFormulario(conjunto);
+            txtCodigoConjunto.Text = conjunto.CodigoConjunto;
+            txtNombreConjunto.Text = conjunto.NombreConjunto;
+            txtEtapa.Text = conjunto.Etapa;
         }
     }
 
@@ -33,22 +37,27 @@ public partial class modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional : Sys
         txtCodigoConjunto.Text = conjunto.CodigoConjunto;
         txtNombreConjunto.Text= conjunto.NombreConjunto;
         txtEtapa.Text = conjunto.Etapa;
-        ddlComuna.SelectedValue = conjunto.IdComunaConjunto.ToString();
         txtDireccionConjunto.Text= conjunto.DireccionConjunto;
         txtRutConstructora.Text= conjunto.RutConstructora;
         txtNombreConstructora.Text= conjunto.NombreConstructora;
         txtRutVendedora.Text= conjunto.RutEmpresaVendedora;
         txtNombreVendedora.Text= conjunto.NombreEmpresaVendedora;
         txtNombreRepresentateVendedora.Text= conjunto.RepresentanteEmpresaVendedora;
-        ddlComunaVendedora.SelectedValue = conjunto.IdComunaEmpresaVendedora.ToString();
         txtDireccionVendedora.Text = conjunto.DireccionEmpresaVendedora;
         txtCodigoFonoVendedora.Text = conjunto.AreaEmpresaVendedora;
         txtFonoVendedora.Text = conjunto.TelefonoEmpresaVendedora;
         txtMailVendedora.Text = conjunto.EmailEmpresaVendedora;
-        txtFechaContrato.Text= conjunto.FechaContrato.ToShortDateString();
-        txtFechaTermino.Text= conjunto.FechaTerminoConstruccion.ToShortDateString();
-        txtFechaRecepcionMunicipal.Text= conjunto.FechaRecepcionMunicipal.ToShortDateString();
-        txtFechaRecepcionProHogar.Text= conjunto.FechaRecepcionProhogar.ToShortDateString();
+        txtFechaContrato.Text= conjunto.FechaContrato.Year.Equals(1900)?"":conjunto.FechaContrato.ToShortDateString();
+        txtFechaTermino.Text= conjunto.FechaTerminoConstruccion.Year.Equals(1900)?"":conjunto.FechaTerminoConstruccion.ToShortDateString();
+        txtFechaRecepcionMunicipal.Text= conjunto.FechaRecepcionMunicipal.Year.Equals(1900)?"":conjunto.FechaRecepcionMunicipal.ToShortDateString();
+        txtFechaRecepcionProHogar.Text= conjunto.FechaRecepcionProhogar.Year.Equals(1900)?"":conjunto.FechaRecepcionProhogar.ToShortDateString();
+        new Utilidad().cargarRegion(ddlRegionConjunto, conjunto.ComunaConjunto.Ciudad.Region.IdRegion.ToString());
+        new Utilidad().cargarCiudad(ddlCiudadConjunto, conjunto.ComunaConjunto.Ciudad.Region.IdRegion.ToString(),conjunto.ComunaConjunto.Ciudad.IdCiudad.ToString());
+        new Utilidad().cargarComuna(ddlComuna, conjunto.ComunaConjunto.Ciudad.IdCiudad.ToString(), conjunto.ComunaConjunto.IdComuna.ToString());
+
+        new Utilidad().cargarRegion(ddlRegionVendedora, conjunto.ComunaVendedora.Ciudad.Region.IdRegion.ToString());
+        new Utilidad().cargarCiudad(ddlCiudadVendedora, conjunto.ComunaVendedora.Ciudad.Region.IdRegion.ToString(), conjunto.ComunaVendedora.Ciudad.IdCiudad.ToString());
+        new Utilidad().cargarComuna(ddlComunaVendedora, conjunto.ComunaVendedora.Ciudad.IdCiudad.ToString(), conjunto.ComunaVendedora.IdComuna.ToString());
     }
     public ConjuntoHabitacional_ENT datosConjuntoHabitacional()
     {
@@ -57,7 +66,7 @@ public partial class modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional : Sys
         oConjunto.CodigoConjunto = "";
         oConjunto.NombreConjunto = Convert.ToString(txtNombreConjunto.Text);
         oConjunto.Etapa = Convert.ToString(txtEtapa.Text);
-        oConjunto.IdComunaConjunto = Convert.ToInt32(ddlComuna.SelectedValue);
+        oConjunto.ComunaConjunto.IdComuna = Convert.ToInt32(ddlComuna.SelectedValue);
         oConjunto.DireccionConjunto = Convert.ToString(txtDireccionConjunto.Text);
         oConjunto.RutConstructora = Convert.ToString(txtRutConstructora.Text);
         oConjunto.NombreConstructora = Convert.ToString(txtNombreConstructora.Text);
@@ -172,9 +181,36 @@ public partial class modulo_conjuntoHabitacional_Tabs_ConjuntoHabitacional : Sys
         if (this.validar())
         {
             ConjuntoHabitacional_ENT conjunto = this.datosConjuntoHabitacional();
-            //conjunto = new ConjuntoHabitacional_BSS().insertConjuntoHabitacional(conjunto);
+            ConjuntoHabitacional_ENT conjuntoSession = (ConjuntoHabitacional_ENT)Session["conjuntoHabitacionalSeleccionado"];
+            conjunto.IdConjuntoHabitacional = conjuntoSession.IdConjuntoHabitacional;
+            conjunto.CodigoConjunto = conjuntoSession.CodigoConjunto;
+            conjunto.Etapa = conjuntoSession.Etapa;
+            new ConjuntoHabitacional_BSS().update(conjunto);
             Session["conjuntoHabitacionalSeleccionado"] = conjunto;
+            ClientScript.RegisterStartupScript(this.GetType(), "",
+                JavaScript.alert("Conjunto Habitacional Actualizado exitósamente"));
             Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ConjuntoHabitacional.aspx");
         }
+    }
+
+    protected void ddlRegionConjunto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarCiudad(ddlCiudadConjunto, ddlRegionConjunto.SelectedValue, "0");
+    }
+    protected void ddlCiudadConjunto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarComuna(ddlComuna, ddlCiudadConjunto.SelectedValue, "0");
+    }
+    protected void ddlRegionVendedora_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarCiudad(ddlCiudadVendedora, ddlRegionVendedora.SelectedValue, "0");
+    }
+    protected void ddlCiudadVendedora_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        new Utilidad().cargarComuna(ddlComunaVendedora, ddlCiudadVendedora.SelectedValue, "0");
+    }
+    protected void btnLimpiar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/modulo/conjuntoHabitacional/Tabs/ConjuntoHabitacional.aspx");
     }
 }
